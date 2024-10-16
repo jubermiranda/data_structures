@@ -1,0 +1,11 @@
+*.swp
+.build
+.build/
+.cache
+.cache/
+.env
+
+.ycm_extra_conf.py
+gtest.cc
+gtest_main.cc
+compile_commands.json
