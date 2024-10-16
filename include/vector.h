@@ -9,7 +9,7 @@ using std::string;
 namespace MY_DS {
 
 const static size_t SIZE_LIMIT = 16384;
-const static size_t STD_MAX_SIZE = 255;
+const static size_t BLOCK_SIZE = 255;
 
 template <typename DataType> class Vector {
 public:
@@ -43,6 +43,8 @@ private:
   size_t max;
   size_t crr_size;
   DataType *data;
+
+  void expand_size_one_block();
 };
 
 // --
@@ -75,18 +77,47 @@ template <typename DataType> void Vector<DataType>::resize(size_t new_size) {
   delete[] aux;
 }
 
-template <typename DataType> 
+template <typename DataType>
 void Vector<DataType>::push_back(const DataType &el) {
-  if(this->crr_size == this->max)
-    this->resize(this->max + STD_MAX_SIZE);
+  if (this->crr_size == this->max)
+    this->resize(this->max + BLOCK_SIZE);
 
   this->data[this->crr_size++] = el;
 }
 
 template <typename DataType>
+void Vector<DataType>::insert(size_t index, const DataType &el) {
+  if (index > this->crr_size)
+    throw std::runtime_error("index out of range");
+
+  if(this->crr_size == this->max)
+    this->expand_size_one_block();
+
+  if (index < this->crr_size){
+    for(size_t i = this->crr_size; i > index; i++)
+      this->data[i] = this->data[i-1];
+
+    *(this->data[index]) = el;
+    this->crr_size++;
+    return;
+  }
+
+  if(index == this->crr_size){
+    *(this->data[this->crr_size]) = el;
+    this->crr_size++;
+    return;
+  }
+
+  throw std::runtime_error("unexpected error");
+}
+
+//
+//
+
+template <typename DataType>
 Vector<DataType>::Vector()
 
-    : data(new DataType[STD_MAX_SIZE]), max(STD_MAX_SIZE), crr_size(0) {}
+    : data(new DataType[BLOCK_SIZE]), max(BLOCK_SIZE), crr_size(0) {}
 
 template <typename DataType>
 Vector<DataType>::Vector(const Vector &other)
@@ -112,6 +143,12 @@ Vector<DataType>::Vector(size_t max)
 
 template <typename DataType> Vector<DataType>::~Vector() {
   delete[] this->data;
+}
+
+template <typename DataType> 
+void Vector<DataType>::expand_size_one_block() {
+  size_t new_size = this->max + BLOCK_SIZE;
+  this->resize(new_size);
 }
 
 } // namespace MY_DS
