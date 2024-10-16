@@ -1,19 +1,21 @@
 #ifndef MY_DS_VECTOR_H_
 #define MY_DS_VECTOR_H_
 
+#include <stdexcept>
 #include <string>
 
 using std::string;
 
 namespace MY_DS {
 
+const static size_t SIZE_LIMIT = 16384;
 const static size_t STD_MAX_SIZE = 255;
 
 template <typename DataType> class Vector {
 public:
   Vector(size_t max_size);
 
-  bool is_empty();
+  bool is_empty() const;
   size_t size() const;
   size_t max_size() const;
   void resize(size_t new_size);
@@ -46,6 +48,40 @@ private:
 // --
 
 // IMPL
+
+template <typename DataType> bool Vector<DataType>::is_empty() const {
+  return (this->crr_size == 0);
+}
+
+template <typename DataType> size_t Vector<DataType>::size() const {
+  return this->crr_size;
+}
+
+template <typename DataType> size_t Vector<DataType>::max_size() const {
+  return this->max;
+}
+
+template <typename DataType> void Vector<DataType>::resize(size_t new_size) {
+  if (new_size >= SIZE_LIMIT)
+    throw std::runtime_error("out of max limit");
+
+  DataType *aux = this->data;
+
+  this->data = new DataType[new_size];
+  this->max = new_size;
+  for (size_t i = 0; i < this->crr_size; i++)
+    this->data[i] = aux[i];
+
+  delete[] aux;
+}
+
+template <typename DataType> 
+void Vector<DataType>::push_back(const DataType &el) {
+  if(this->crr_size == this->max)
+    this->resize(this->max + STD_MAX_SIZE);
+
+  this->data[this->crr_size++] = el;
+}
 
 template <typename DataType>
 Vector<DataType>::Vector()
