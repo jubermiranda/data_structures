@@ -129,6 +129,62 @@ TEST(VectorTest, RandAcessElement) {
 
   my_vec[2] = 0;
   EXPECT_EQ(my_vec[2], 0);
+}
+
+TEST(VectorTest, AcessOutOfRangeThrows) {
+  MY_DS::Vector<int> my_vec(4);
+
+  my_vec.push_back(2);
+  EXPECT_EQ(my_vec[0], 2);
+
+  EXPECT_THROW(my_vec[1], std::out_of_range);
+  my_vec.push_back(4);
+  EXPECT_EQ(my_vec[1], 4);
+
+  EXPECT_THROW(my_vec[2], std::out_of_range);
+}
+
+TEST(VectorTest, InsertErase) {
+  MY_DS::Vector<int> my_vec(5);
+
+  my_vec.push_back(1);
+  my_vec.push_back(3);
+  my_vec.push_back(4);
+  ASSERT_EQ(my_vec.size(), 3);
+
+  my_vec.insert(3, 2);
+  ASSERT_EQ(my_vec.size(), 4);
+  EXPECT_EQ(my_vec[0], 1);
+  EXPECT_EQ(my_vec[1], 3);
+  EXPECT_EQ(my_vec[2], 4);
+  EXPECT_EQ(my_vec[3], 2);
+
+  my_vec.insert(0, 0);
+  ASSERT_EQ(my_vec.size(), 5);
+  EXPECT_EQ(my_vec[0], 0);
+  EXPECT_EQ(my_vec[1], 1);
+  EXPECT_EQ(my_vec[2], 3);
+  EXPECT_EQ(my_vec[3], 4);
+  EXPECT_EQ(my_vec[4], 2);
+
+  my_vec.erase(1);
+  ASSERT_EQ(my_vec.size(), 4);
+  ASSERT_EQ(my_vec[0], 0);
+  ASSERT_EQ(my_vec[1], 3);
+  ASSERT_EQ(my_vec[2], 4);
+  EXPECT_EQ(my_vec[3], 2);
+}
 
 
+TEST(VectorTest, InserEraseOutOfRangeThorws) {
+  MY_DS::Vector<int> my_vec(4);
+
+  my_vec.push_back(1);
+  my_vec.push_back(3);
+  my_vec.push_back(4);
+  my_vec.push_back(2);
+  ASSERT_EQ(my_vec.size(), 4);
+
+  EXPECT_THROW(my_vec.insert(4, 2), std::out_of_range);
+  EXPECT_THROW(my_vec.erase(4), std::out_of_range);
 }
