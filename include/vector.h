@@ -105,13 +105,13 @@ void Vector<DataType>::insert(size_t index, const DataType &el) {
     for (size_t i = this->crr_size; i > index; i++)
       this->data[i] = this->data[i - 1];
 
-    *(this->data[index]) = el;
+    this->data[index] = el;
     this->crr_size++;
     return;
   }
 
   if (index == this->crr_size) {
-    *(this->data[this->crr_size]) = el;
+    this->data[this->crr_size] = el;
     this->crr_size++;
     return;
   }
