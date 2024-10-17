@@ -165,6 +165,29 @@ template <typename DataType> void Vector<DataType>::expand_size_one_block() {
   this->resize(new_size);
 }
 
-} // namespace MY_DS
+template <typename DataType>
+Vector<DataType> &Vector<DataType>::operator=(const Vector &other) {
+  if (*this != other) {
+    delete[] this->data;
+    this->data = new DataType[other.max];
+    this->crr_size = other.crr_size;
+    this->max = other.max;
+    for (size_t i = 0; i < other.crr_size; i++)
+      this->data[i] = other.data[i];
+  }
+  return *this;
+}
 
+template <typename DataType>
+Vector<DataType> &Vector<DataType>::operator=(Vector &&other) noexcept {
+  this->max = other.max;
+  this->crr_size = other.crr_size;
+  this->data = other.data;
+
+  other.crr_size = 0;
+  other.max = 0;
+  other.data = nullptr;
+}
+
+} // namespace MY_DS
 #endif // MY_DS_VECTOR_H_
