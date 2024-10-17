@@ -5,9 +5,28 @@
 
 using std::string;
 
-TEST(SampleTest, AssertionTrue) {
-  string lhs = "not implemented";
-  string rhs = "implemented";
+TEST(VectorTest, CreateVector) {
+  MY_DS::Vector<int> my_vec;
+  EXPECT_EQ(my_vec.size(), 0);
+}
 
-  EXPECT_STREQ(lhs.c_str(), rhs.c_str());
+
+TEST(VectorTest, PushPopBack) {
+  MY_DS::Vector<int> my_vec(4);
+  EXPECT_EQ(my_vec.size(), 0);
+
+  my_vec.push_back(4);
+  EXPECT_EQ(my_vec.size(), 1);
+
+  my_vec.push_back(2);
+  EXPECT_EQ(my_vec.size(), 2);
+
+  my_vec.pop_back();
+  EXPECT_EQ(my_vec.size(), 1);
+
+  my_vec.pop_back();
+  EXPECT_EQ(my_vec.size(), 0);
+
+  my_vec.pop_back();
+  EXPECT_EQ(my_vec.size(), 0);
 }
