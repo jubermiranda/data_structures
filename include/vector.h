@@ -1,7 +1,6 @@
 #ifndef MY_DS_VECTOR_H_
 #define MY_DS_VECTOR_H_
 
-#include <functional>
 #include <stdexcept>
 #include <string>
 
@@ -95,14 +94,14 @@ void Vector<DataType>::push_back(const DataType &el) {
 
 template <typename DataType>
 void Vector<DataType>::insert(size_t index, const DataType &el) {
-  if (index > this->crr_size)
-    throw std::runtime_error("index out of range");
+  if (index >= this->crr_size)
+    throw std::out_of_range("index out of range");
 
   if (this->crr_size == this->max)
     this->expand_size_one_block();
 
   if (index < this->crr_size) {
-    for (size_t i = this->crr_size; i > index; i++)
+    for (size_t i = this->crr_size; i > index; i--)
       this->data[i] = this->data[i - 1];
 
     this->data[index] = el;
@@ -117,6 +116,17 @@ void Vector<DataType>::insert(size_t index, const DataType &el) {
   }
 
   throw std::runtime_error("unexpected error");
+}
+
+template <typename DataType>
+void Vector<DataType>::erase(size_t index) {
+  if(index >= this->crr_size)
+    throw std::out_of_range("index out of range");
+
+  for(size_t i = index; i < this->crr_size; i++)
+    this->data[i] = this->data[i+1];
+
+  this->crr_size--;
 }
 
 template <typename DataType> void Vector<DataType>::pop_back() {
