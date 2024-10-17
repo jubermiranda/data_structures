@@ -90,25 +90,32 @@ void Vector<DataType>::insert(size_t index, const DataType &el) {
   if (index > this->crr_size)
     throw std::runtime_error("index out of range");
 
-  if(this->crr_size == this->max)
+  if (this->crr_size == this->max)
     this->expand_size_one_block();
 
-  if (index < this->crr_size){
-    for(size_t i = this->crr_size; i > index; i++)
-      this->data[i] = this->data[i-1];
+  if (index < this->crr_size) {
+    for (size_t i = this->crr_size; i > index; i++)
+      this->data[i] = this->data[i - 1];
 
     *(this->data[index]) = el;
     this->crr_size++;
     return;
   }
 
-  if(index == this->crr_size){
+  if (index == this->crr_size) {
     *(this->data[this->crr_size]) = el;
     this->crr_size++;
     return;
   }
 
   throw std::runtime_error("unexpected error");
+}
+
+template <typename DataType> void Vector<DataType>::pop_back() {
+  if (this->crr_size > 0) {
+    // if target class has dynamic data, should call destructor here
+    this->crr_size--;
+  }
 }
 
 //
@@ -145,8 +152,7 @@ template <typename DataType> Vector<DataType>::~Vector() {
   delete[] this->data;
 }
 
-template <typename DataType> 
-void Vector<DataType>::expand_size_one_block() {
+template <typename DataType> void Vector<DataType>::expand_size_one_block() {
   size_t new_size = this->max + BLOCK_SIZE;
   this->resize(new_size);
 }
