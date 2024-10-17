@@ -104,3 +104,16 @@ TEST(VectorTest, SwapVectors) {
   EXPECT_EQ(vec1.size(), 2);
   EXPECT_EQ(vec2.size(), 4);
 }
+
+TEST(VectorTest, ResizeVector) {
+  MY_DS::Vector<int> my_vec(4);
+
+  EXPECT_EQ(my_vec.max_size(), 4);
+  my_vec.resize(2);
+  EXPECT_EQ(my_vec.max_size(), 2);
+}
+
+
+TEST(VectorTest, RandAcessElement) {
+  //
+}
