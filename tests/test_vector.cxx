@@ -74,3 +74,33 @@ TEST(VectorTest, TypeClassPushPopBack) {
   my_vec.pop_back();
   EXPECT_EQ(my_vec.size(), 0);
 }
+
+TEST(VectorTest, IsEmptyWorks) {
+  MY_DS::Vector<int> my_vec;
+  EXPECT_TRUE(my_vec.is_empty());
+
+  my_vec.push_back(1);
+  EXPECT_FALSE(my_vec.is_empty());
+}
+
+TEST(VectorTest, SwapVectors) {
+  MY_DS::Vector<int> vec1;
+  MY_DS::Vector<int> vec2;
+
+  vec1.push_back(2);
+  vec1.push_back(2);
+  vec1.push_back(2);
+  vec1.push_back(2);
+
+  vec2.push_back(4);
+  vec2.push_back(4);
+
+
+  EXPECT_EQ(vec1.size(), 4);
+  EXPECT_EQ(vec2.size(), 2);
+
+  vec1.swap(vec2);
+
+  EXPECT_EQ(vec1.size(), 2);
+  EXPECT_EQ(vec2.size(), 4);
+}
