@@ -1,6 +1,7 @@
 #ifndef MY_DS_VECTOR_H_
 #define MY_DS_VECTOR_H_
 
+#include <functional>
 #include <stdexcept>
 #include <string>
 
@@ -75,6 +76,13 @@ template <typename DataType> void Vector<DataType>::resize(size_t new_size) {
     this->data[i] = aux[i];
 
   delete[] aux;
+}
+
+template <typename DataType>
+void Vector<DataType>::swap(Vector<DataType> &other) {
+  std::swap(this->max, other.max);
+  std::swap(this->crr_size, other.crr_size);
+  std::swap(this->data, other.data);
 }
 
 template <typename DataType>
