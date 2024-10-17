@@ -115,5 +115,20 @@ TEST(VectorTest, ResizeVector) {
 
 
 TEST(VectorTest, RandAcessElement) {
-  //
+  MY_DS::Vector<int> my_vec(4);
+
+  my_vec.push_back(4);
+  my_vec.push_back(2);
+  my_vec.push_back(3);
+  my_vec.push_back(1);
+
+  EXPECT_EQ(my_vec[0], 4);
+  EXPECT_EQ(my_vec[1], 2);
+  EXPECT_EQ(my_vec[2], 3);
+  EXPECT_EQ(my_vec[3], 1);
+
+  my_vec[2] = 0;
+  EXPECT_EQ(my_vec[2], 0);
+
+
 }
