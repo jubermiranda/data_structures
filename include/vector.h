@@ -189,5 +189,18 @@ Vector<DataType> &Vector<DataType>::operator=(Vector &&other) noexcept {
   other.data = nullptr;
 }
 
+template <typename DataType>
+const DataType &Vector<DataType>::operator[](size_t i) const {
+  if (i >= this->crr_size)
+    throw std::out_of_range("index out of vector range");
+  return this->data[i];
+}
+
+template <typename DataType> DataType &Vector<DataType>::operator[](size_t i) {
+  if (i >= this->crr_size)
+    throw std::out_of_range("index out of vector range");
+  return this->data[i];
+}
+
 } // namespace MY_DS
 #endif // MY_DS_VECTOR_H_
