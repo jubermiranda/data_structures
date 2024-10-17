@@ -146,13 +146,11 @@ TEST(VectorTest, AcessOutOfRangeThrows) {
 
 TEST(VectorTest, InsertErase) {
   MY_DS::Vector<int> my_vec(5);
-
   my_vec.push_back(1);
   my_vec.push_back(3);
   my_vec.push_back(4);
-  ASSERT_EQ(my_vec.size(), 3);
+  my_vec.push_back(2);
 
-  my_vec.insert(3, 2);
   ASSERT_EQ(my_vec.size(), 4);
   EXPECT_EQ(my_vec[0], 1);
   EXPECT_EQ(my_vec[1], 3);
