@@ -17,6 +17,8 @@ public:
   bool is_empty() const { return crr_size == 0; };
   size_t size() const { return crr_size; };
 
+  void push(const DataType new_node);
+
 private:
   size_t crr_size;
   Node<DataType> *root;
