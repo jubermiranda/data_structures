@@ -7,13 +7,8 @@ public:
   Node(DataType data, Node<DataType> *next);
   ~Node();
 
-  DataType data() { return _data; }
-  Node<DataType> *next() { return _next; }
-
-
-private:
-  DataType _data;
-  Node<DataType> *_next;
+  DataType data;
+  Node<DataType> *next;
 };
 
 // --
