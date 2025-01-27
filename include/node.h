@@ -5,7 +5,6 @@ template <typename DataType> class Node {
 public:
   Node(DataType data);
   Node(DataType data, Node<DataType> *next);
-  ~Node();
 
   DataType data;
   Node<DataType> *next;
@@ -26,10 +25,5 @@ Node<DataType>::Node(DataType data, Node<DataType> *next) {
   this->next = next;
 }
 
-template <typename DataType> 
-Node<DataType>::~Node() {
-  if(this->_next != nullptr)
-    ~(this->_next);
-}
 
 #endif // MY_DS_NODE_H_

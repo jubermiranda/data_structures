@@ -33,3 +33,22 @@ TEST(ListTest, PushElements) {
   my_list_str.push("test3");
   EXPECT_EQ(my_list_str.size(), 4);
 }
+
+TEST(ListTest, PopElement) {
+  MY_DS::List<int> my_list;
+  my_list.push(4);
+  my_list.push(2);
+  my_list.push(3);
+  my_list.push(1);
+
+  EXPECT_EQ(my_list.size(), 4);
+  my_list.pop();
+  my_list.pop();
+  EXPECT_EQ(my_list.size(), 2);
+  my_list.pop();
+  my_list.pop();
+  EXPECT_EQ(my_list.size(), 0);
+
+  my_list.pop();
+  EXPECT_EQ(my_list.size(), 0);
+}

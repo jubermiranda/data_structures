@@ -19,6 +19,7 @@ public:
   void clear();
 
   void push(const DataType &new_node);
+  void pop();
 
 private:
   size_t crr_size;
@@ -38,8 +39,15 @@ void List<DataType>::push(const DataType &new_data) {
   }
 
   Node<DataType> *aux = root;
+  if(aux->data < new_node->data){
+    new_node->next = aux;
+    root = new_node;
+    crr_size++;
+    return;
+  }
+
   while (aux->next != nullptr) {
-    if (aux->next->data > new_node->data) {
+    if (aux->next->data < new_node->data) {
       new_node->next = aux->next;
       aux->next = new_node;
       crr_size++;
@@ -51,6 +59,18 @@ void List<DataType>::push(const DataType &new_data) {
   aux->next = new_node;
   crr_size++;
 }
+
+template <typename DataType>
+void List<DataType>::pop() {
+  if(crr_size == 0)
+    return;
+  Node<DataType>* popped = root;
+  root = root->next;
+  ~(popped->data);
+
+  crr_size--;
+}
+
 
 };     // namespace MY_DS
 #endif // MY_DS_LINKED_H_
