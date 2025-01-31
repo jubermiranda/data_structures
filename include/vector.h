@@ -14,6 +14,12 @@ const static size_t BLOCK_SIZE = 255;
 template <typename DataType> class Vector {
 public:
   Vector(size_t max_size);
+  Vector();
+  Vector(const Vector &);
+  Vector(Vector &&) noexcept;
+  ~Vector();
+  Vector &operator=(const Vector &);
+  Vector &operator=(Vector &&) noexcept;
 
   bool is_empty() const;
   size_t size() const;
@@ -22,19 +28,12 @@ public:
   void swap(Vector<DataType> &other);
 
   void push_back(const DataType &);
+  void pop_back();
   void insert(size_t, const DataType &);
   void erase(size_t i);
-  void pop_back();
 
   const DataType &at(size_t i) const;
   DataType &at(size_t i);
-
-  Vector();
-  Vector(const Vector &);
-  Vector(Vector &&) noexcept;
-  ~Vector();
-  Vector &operator=(const Vector &);
-  Vector &operator=(Vector &&) noexcept;
 
   const DataType &operator[](size_t i) const;
   DataType &operator[](size_t i);
