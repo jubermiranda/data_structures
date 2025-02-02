@@ -1,7 +1,7 @@
 #ifndef VECTOR_TPP
 #define VECTOR_TPP
 
-
+#include <stdexcept>
 namespace MY_DS {
 
 template <typename DataType> bool Vector<DataType>::is_empty() const {
@@ -18,7 +18,14 @@ template <typename DataType> size_t Vector<DataType>::max_size() const {
 
 template <typename DataType> void Vector<DataType>::resize(size_t new_size) {
   if (new_size >= SIZE_LIMIT)
-    throw std::runtime_error("out of max limit");
+    throw std::out_of_range("Resize limit exceeded");
+
+  if(new_size < crr_size){
+    crr_size = new_size;
+    // if DataType has dynamic data, 
+    // maybe the destructor should be called here
+    // for removed elements
+  }
 
   DataType *aux = this->data;
 
@@ -71,13 +78,12 @@ void Vector<DataType>::insert(size_t index, const DataType &el) {
   throw std::runtime_error("unexpected error");
 }
 
-template <typename DataType>
-void Vector<DataType>::erase(size_t index) {
-  if(index >= this->crr_size)
+template <typename DataType> void Vector<DataType>::erase(size_t index) {
+  if (index >= this->crr_size)
     throw std::out_of_range("index out of range");
 
-  for(size_t i = index; i < this->crr_size; i++)
-    this->data[i] = this->data[i+1];
+  for (size_t i = index; i < this->crr_size; i++)
+    this->data[i] = this->data[i + 1];
 
   this->crr_size--;
 }
@@ -112,7 +118,7 @@ Vector<DataType>::Vector(Vector &&other) noexcept
 
 template <typename DataType>
 Vector<DataType>::Vector(size_t max)
-    : max(max), crr_size(0), data((max)?new DataType[max]:nullptr) {}
+    : max(max), crr_size(0), data((max) ? new DataType[max] : nullptr) {}
 
 template <typename DataType> Vector<DataType>::~Vector() {
   delete[] this->data;
