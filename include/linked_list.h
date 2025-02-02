@@ -1,76 +1,37 @@
-#ifndef MY_DS_LINKED_H_
-#define MY_DS_LINKED_H_
-
-#include <stdexcept>
-#include <string>
+#ifndef LINKED_H_
+#define LINKED_H_
 
 #include "node.h"
-
-using std::string;
+#include <cstddef>
 
 namespace MY_DS {
 
-template <typename DataType> class List {
-public:
-  List() : crr_size(0), root(nullptr){};
-
-  bool is_empty() const { return crr_size == 0; };
-  size_t size() const { return crr_size; };
-  void clear();
-
-  void push(const DataType &new_node);
-  void pop();
-
+template <typename T> class LinkedList {
 private:
+  Node<T> *root;
   size_t crr_size;
-  Node<DataType> *root;
+
+public:
+  LinkedList();
+  ~LinkedList();
+
+  void push_front(const T &value);
+  void push_back(const T &value);
+  void pop_front();
+  void pop_back();
+
+  T front() const;
+  T back() const;
+
+  bool is_empty() const;
+  size_t size() const;
+
+  void clear();
 };
 
-// --
+} // namespace MY_DS
+
 // IMPL
+#include "linked_list.tpp"
 
-template <typename DataType>
-void List<DataType>::push(const DataType &new_data) {
-  Node<DataType> *new_node = new Node<DataType>(new_data);
-  if (root == nullptr) {
-    root = new_node;
-    crr_size++;
-    return;
-  }
-
-  Node<DataType> *aux = root;
-  if(aux->data < new_node->data){
-    new_node->next = aux;
-    root = new_node;
-    crr_size++;
-    return;
-  }
-
-  while (aux->next != nullptr) {
-    if (aux->next->data < new_node->data) {
-      new_node->next = aux->next;
-      aux->next = new_node;
-      crr_size++;
-      return;
-    }
-    aux = aux->next;
-  }
-
-  aux->next = new_node;
-  crr_size++;
-}
-
-template <typename DataType>
-void List<DataType>::pop() {
-  if(crr_size == 0)
-    return;
-  Node<DataType>* popped = root;
-  root = root->next;
-  ~(popped->data);
-
-  crr_size--;
-}
-
-
-};     // namespace MY_DS
-#endif // MY_DS_LINKED_H_
+#endif // LINKED_H_
