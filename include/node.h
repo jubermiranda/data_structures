@@ -1,29 +1,14 @@
-#ifndef MY_DS_NODE_H_
-#define MY_DS_NODE_H_
+#ifndef NODE_H_
+#define NODE_H_
 
-template <typename DataType> class Node {
+template <typename T> class Node {
+private:
+  T data;
+  Node<T> *next;
+
 public:
-  Node(DataType data);
-  Node(DataType data, Node<DataType> *next);
-
-  DataType data;
-  Node<DataType> *next;
+  Node(const T &value, Node<T> *next_node = nullptr)
+      : data(value), next(next_node){};
 };
 
-// --
-// IMPL
-
-template <typename DataType> 
-Node<DataType>::Node(DataType data) {
-  this->data = data;
-  this->next = nullptr;
-}
-
-template <typename DataType> 
-Node<DataType>::Node(DataType data, Node<DataType> *next) {
-  this->data = data;
-  this->next = next;
-}
-
-
-#endif // MY_DS_NODE_H_
+#endif // NODE_H_
