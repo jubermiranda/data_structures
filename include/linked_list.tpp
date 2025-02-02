@@ -2,7 +2,8 @@
 #define LINKED_TPP_
 
 #include "node.h"
-#include <regex.h>
+
+#include <stdexcept>
 
 namespace MY_DS {
 
@@ -67,14 +68,14 @@ template <typename T> void LinkedList<T>::pop_back() {
 
 template <typename T> T LinkedList<T>::front() const {
   if (this->root == nullptr)
-    throw runtime_error("Empty list");
+    throw std::runtime_error("Empty list");
 
   return this->root->data;
 }
 
 template <typename T> T LinkedList<T>::back() const {
   if (this->root == nullptr)
-    throw runtime_error("Empty list");
+    throw std::runtime_error("Empty list");
 
   Node<T> *aux = this->root;
   while (aux->next != nullptr)
@@ -91,7 +92,7 @@ template <typename T> size_t LinkedList<T>::size() const {
   return this->crr_size;
 }
 
-template <typename T> void LinkedList<T>::clear() const {
+template <typename T> void LinkedList<T>::clear() {
   while (this->root != nullptr) {
     Node<T> *aux = this->root;
     this->root = root->next;
