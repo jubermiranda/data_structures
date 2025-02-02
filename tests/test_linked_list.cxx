@@ -90,3 +90,27 @@ TEST(LinkedListTest, PopBack){
   list.pop_back();
   EXPECT_EQ(list.back(), 11);
 }
+
+TEST(LinkedListTest, Clear){
+  MY_DS::LinkedList<int> list;
+
+  list.push_front(2);
+  list.push_front(3);
+  list.push_front(5);
+  list.push_front(7);
+  list.push_front(11);
+
+  EXPECT_EQ(list.size(), 5);
+  EXPECT_FALSE(list.is_empty());
+
+  list.clear();
+
+  EXPECT_EQ(list.size(), 0);
+  EXPECT_TRUE(list.is_empty());
+
+  // assert clear already empty list does nothing
+  MY_DS::LinkedList<int> empty_list;
+  EXPECT_EQ(list.size(), 0);
+  list.clear();
+  EXPECT_EQ(list.size(), 0);
+}
