@@ -69,23 +69,31 @@ template <typename T> void LinkedList<T>::pop_back() {
   }
 }
 
-template <typename T> T LinkedList<T>::front() const{
+template <typename T> T LinkedList<T>::front() const {
   if (this->root == nullptr)
     throw runtime_error("Empty list");
 
   return this->root->data;
 }
 
-template <typename T> T LinkedList<T>::back() const{
+template <typename T> T LinkedList<T>::back() const {
   if (this->root == nullptr)
     throw runtime_error("Empty list");
 
   Node<T> *aux = this->root;
-  while(aux->next != nullptr)aux = aux->next;
+  while (aux->next != nullptr)
+    aux = aux->next;
 
   return aux->data;
 }
 
+template <typename T> bool LinkedList<T>::is_empty() const {
+  return (this->crr_size == 0);
+}
+
+template <typename T> size_t LinkedList<T>::size() const {
+  return this->crr_size;
+}
 
 } // namespace MY_DS
 
