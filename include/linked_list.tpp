@@ -35,6 +35,38 @@ template <typename T> void LinkedList<T>::push_back(const T &value) {
   crr_size++;
 }
 
+template <typename T> void LinkedList<T>::pop_front() {
+  if(this->root != nullptr){
+    Node<T> *aux = this->root;
+    this->root = this->root->next;
+    delete aux;
+    crr_size--;
+  }
+}
+
+template <typename T> void LinkedList<T>::pop_back() {
+  if(this->root != nullptr){
+    if(this->crr_size == 1){
+      delete this->root;
+      this->root = nullptr;
+      crr_size--;
+      return;
+    }
+    if(this->crr_size == 2){
+      delete this->root->next;
+      this->root->next = nullptr;
+      crr_size--;
+      return;
+    }
+
+    Node<T> *aux = this->root;
+    while(aux->next->next != nullptr) aux = aux->next;
+    delete aux->next;
+    aux->next = nullptr;
+    crr_size--;
+  }
+}
+
 } // namespace MY_DS
 
 #endif // LINKED_TPP_
