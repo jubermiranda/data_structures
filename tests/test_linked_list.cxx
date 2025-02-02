@@ -48,3 +48,45 @@ TEST(LinkedListTest, PushBackFront){
   EXPECT_EQ(list2.back(), 11);
   EXPECT_EQ(list2.front(), 33);
 }
+
+TEST(LinkedListTest, PopFront){
+  MY_DS::LinkedList<int> list;
+
+  list.push_front(2);
+  list.push_front(3);
+  list.push_front(5);
+  list.push_front(7);
+  list.push_front(11);
+  ASSERT_EQ(list.size(), 5);
+  EXPECT_EQ(list.front(), 11);
+
+  list.pop_front();
+  EXPECT_EQ(list.front(), 7);
+  list.pop_front();
+  EXPECT_EQ(list.front(), 5);
+  list.pop_front();
+  EXPECT_EQ(list.front(), 3);
+  list.pop_front();
+  EXPECT_EQ(list.front(), 2);
+}
+
+TEST(LinkedListTest, PopBack){
+  MY_DS::LinkedList<int> list;
+
+  list.push_front(2);
+  list.push_front(3);
+  list.push_front(5);
+  list.push_front(7);
+  list.push_front(11);
+  ASSERT_EQ(list.size(), 5);
+  EXPECT_EQ(list.back(), 2);
+
+  list.pop_back();
+  EXPECT_EQ(list.back(), 3);
+  list.pop_back();
+  EXPECT_EQ(list.back(), 5);
+  list.pop_back();
+  EXPECT_EQ(list.back(), 7);
+  list.pop_back();
+  EXPECT_EQ(list.back(), 11);
+}
