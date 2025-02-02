@@ -10,11 +10,7 @@ template <typename T>
 LinkedList<T>::LinkedList() : root(nullptr), crr_size(0) {}
 
 template <typename T> LinkedList<T>::~LinkedList() {
-  while (this->root != nullptr) {
-    Node<T> *aux = this->root;
-    this->root = root->next;
-    delete aux;
-  }
+  this->clear();
 }
 
 template <typename T> void LinkedList<T>::push_front(const T &value) {
@@ -93,6 +89,15 @@ template <typename T> bool LinkedList<T>::is_empty() const {
 
 template <typename T> size_t LinkedList<T>::size() const {
   return this->crr_size;
+}
+
+template <typename T> void LinkedList<T>::clear() const {
+  while (this->root != nullptr) {
+    Node<T> *aux = this->root;
+    this->root = root->next;
+    delete aux;
+  }
+  this->crr_size = 0;
 }
 
 } // namespace MY_DS
