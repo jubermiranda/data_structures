@@ -20,9 +20,9 @@ template <typename DataType> void Vector<DataType>::resize(size_t new_size) {
   if (new_size >= SIZE_LIMIT)
     throw std::out_of_range("Resize limit exceeded");
 
-  if(new_size < crr_size){
+  if (new_size < crr_size) {
     crr_size = new_size;
-    // if DataType has dynamic data, 
+    // if DataType has dynamic data,
     // maybe the destructor should be called here
     // for removed elements
   }
@@ -82,7 +82,7 @@ template <typename DataType> void Vector<DataType>::erase(size_t index) {
   if (index >= this->crr_size)
     throw std::out_of_range("index out of range");
 
-  for (size_t i = index; i < this->crr_size; i++)
+  for (size_t i = index; i < this->crr_size - 1; i++)
     this->data[i] = this->data[i + 1];
 
   this->crr_size--;
