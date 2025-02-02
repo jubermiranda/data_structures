@@ -131,7 +131,7 @@ template <typename DataType> void Vector<DataType>::expand_size_one_block() {
 
 template <typename DataType>
 Vector<DataType> &Vector<DataType>::operator=(const Vector &other) {
-  if (*this != other) {
+  if (this != &other) {
     delete[] this->data;
     this->data = new DataType[other.max];
     this->crr_size = other.crr_size;
