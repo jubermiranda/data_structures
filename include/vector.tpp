@@ -112,7 +112,7 @@ Vector<DataType>::Vector(Vector &&other) noexcept
 
 template <typename DataType>
 Vector<DataType>::Vector(size_t max)
-    : max(max), crr_size(0), data(new DataType[max]) {}
+    : max(max), crr_size(0), data((max)?new DataType[max]:nullptr) {}
 
 template <typename DataType> Vector<DataType>::~Vector() {
   delete[] this->data;
