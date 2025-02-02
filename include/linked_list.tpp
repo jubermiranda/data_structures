@@ -1,7 +1,7 @@
 #ifndef LINKED_TPP_
 #define LINKED_TPP_
 
-#include "node.h"
+#include "linked_list.h"
 
 #include <stdexcept>
 
