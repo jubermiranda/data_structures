@@ -16,6 +16,12 @@ template <typename T> LinkedList<T>::~LinkedList() {
   }
 }
 
+template <typename T> void LinkedList<T>::push_front(const T &value) {
+  Node<T> *new_node(value, this->root);
+  this->root = new_node;
+  crr_size++;
+} 
+
 } // namespace MY_DS
 
 #endif // LINKED_TPP_
