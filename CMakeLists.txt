@@ -10,6 +10,8 @@ option(BUILD_TESTS "Build project tests (with gtest)" ON)
 enable_testing()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/include/list)
+include_directories(${CMAKE_SOURCE_DIR}/include/vector)
 
 if(BUILD_PROJECT)
     add_executable(
