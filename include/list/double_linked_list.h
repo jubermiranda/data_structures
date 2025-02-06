@@ -1,7 +1,7 @@
 #ifndef DOUBLE_LINKED_H_
 #define DOUBLE_LINKED_H_
 
-#include "d_node.h"
+#include "node.h"
 #include <cstddef>
 
 namespace MY_DS {
