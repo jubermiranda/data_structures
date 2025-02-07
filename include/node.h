@@ -1,12 +1,12 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-template <typename T> class Node {
+template <typename Data> class Node {
 public:
-  T data;
-  Node<T> *next;
+  Data data;
+  Node<Data> *next;
 
-  Node(const T &value, Node<T> *next_node = nullptr)
+  Node(const Data &value, Node<Data> *next_node = nullptr)
       : data(value), next(next_node){};
 };
 
