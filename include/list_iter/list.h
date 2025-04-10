@@ -34,9 +34,9 @@ public:
   T& back();
   const T& back() const;
   iterator<T> begin();
-  const iterator<T> begin() const;
+  const_iterator<T> begin() const;
   iterator<T> end();
-  const iterator<T> end() const;
+  const_iterator<T> end() const;
 
   void swap(List<T> other);
   bool is_empty() const;

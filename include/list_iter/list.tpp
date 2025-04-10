@@ -165,20 +165,20 @@ template <typename T> const T &List<T>::back() const {
   return (tail->data);
 }
 
-template <typename T> const iterator<T> List<T>::begin() const {
-  // TODO
+template <typename T> const_iterator<T> List<T>::begin() const {
+  return const_iterator<T>(this, head);
 }
 
 template <typename T> iterator<T> List<T>::begin() {
-  // TODO
+  return iterator<T>(this, head);
 }
 
-template <typename T> const iterator<T> List<T>::end() const {
-  // TODO
+template <typename T> const_iterator<T> List<T>::end() const {
+  return const_iterator<T>(this, nullptr);
 }
 
 template <typename T> iterator<T> List<T>::end() {
-  // TODO
+  return iterator<T>(this, nullptr);
 }
 
 template <typename T> void List<T>::swap(List<T> other) {
