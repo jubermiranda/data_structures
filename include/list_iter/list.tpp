@@ -182,7 +182,9 @@ template <typename T> iterator<T> List<T>::end() {
 }
 
 template <typename T> void List<T>::swap(List<T> other) {
-  // TODO
+  std::swap(this->head, other.head);
+  std::swap(this->tail, other.tail);
+  std::swap(this->num_items, other.num_items);
 }
 
 template <typename T> bool List<T>::is_empty() const {
