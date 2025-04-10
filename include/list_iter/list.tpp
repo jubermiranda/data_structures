@@ -188,11 +188,11 @@ template <typename T> void List<T>::swap(List<T> other) {
 }
 
 template <typename T> bool List<T>::is_empty() const {
-  // TODO
+  return num_items == 0;
 }
 
 template <typename T> size_t List<T>::size() const {
-  // TODO
+  return num_items;
 }
 
 template <typename T> void List<T>::clear() {
