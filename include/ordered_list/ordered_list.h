@@ -18,6 +18,10 @@ public:
   size_t size() const;
   const_iterator begin() const;
   const_iterator end() const;
+
+private:
+  void insert_from_begin(const T&);
+  void insert_from_end(const T&);
 };
 
 #include "ordered_list.tpp"
