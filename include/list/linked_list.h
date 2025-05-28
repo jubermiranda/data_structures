@@ -1,5 +1,4 @@
-#ifndef LINKED_H_
-#define LINKED_H_
+#pragma once
 
 #include "node.h"
 #include <cstddef>
@@ -33,5 +32,3 @@ public:
 
 // IMPL
 #include "linked_list.tpp"
-
-#endif // LINKED_H_

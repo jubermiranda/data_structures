@@ -1,5 +1,4 @@
-#ifndef LINKED_TPP_
-#define LINKED_TPP_
+#pragma once
 
 #include "linked_list.h"
 
@@ -102,5 +101,3 @@ template <typename T> void LinkedList<T>::clear() {
 }
 
 } // namespace MY_DS
-
-#endif // LINKED_TPP_

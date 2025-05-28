@@ -1,5 +1,4 @@
-#ifndef VECTOR_TPP
-#define VECTOR_TPP
+#pragma once
 
 #include <stdexcept>
 namespace MY_DS {
@@ -167,4 +166,3 @@ template <typename DataType> DataType &Vector<DataType>::operator[](size_t i) {
 }
 
 } // namespace MY_DS
-#endif // VECTOR_TPP

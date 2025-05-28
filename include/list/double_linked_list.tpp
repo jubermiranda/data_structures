@@ -1,5 +1,4 @@
-#ifndef DOUBLE_LINKED_TPP_
-#define DOUBLE_LINKED_TPP_
+#pragma once
 
 #include "double_linked_list.h"
 
@@ -102,5 +101,3 @@ template <typename T> void DoubleLinkedList<T>::clear() {
 }
 
 } // namespace MY_DS
-
-#endif // DOUBLE_LINKED_TPP_

@@ -1,5 +1,4 @@
-#ifndef MY_DS_VECTOR_H_
-#define MY_DS_VECTOR_H_
+#pragma once
 
 #include <stdexcept>
 #include <utility>
@@ -49,5 +48,3 @@ private:
 
 // IMPL
 #include "vector.tpp"
-
-#endif // MY_DS_VECTOR_H_

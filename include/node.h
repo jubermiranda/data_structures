@@ -1,5 +1,4 @@
-#ifndef NODE_H_
-#define NODE_H_
+#pragma once
 
 template <typename Data> class Node {
 public:
@@ -19,6 +18,3 @@ public:
   DNode(const Data &value, DNode<Data> *next_node = nullptr, DNode<Data> *prev_node = nullptr)
       : data(value), next(next_node), prev(prev_node){};
 };
-
-
-#endif // NODE_H_

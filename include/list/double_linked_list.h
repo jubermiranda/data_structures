@@ -1,5 +1,4 @@
-#ifndef DOUBLE_LINKED_H_
-#define DOUBLE_LINKED_H_
+#pragma once
 
 #include "node.h"
 #include <cstddef>
@@ -33,5 +32,3 @@ public:
 
 // IMPL
 #include "double_linked_list.tpp"
-
-#endif // DOUBLE_LINKED_H_
