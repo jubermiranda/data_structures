@@ -45,13 +45,13 @@ template <typename T> size_t Stack<T>::size() const{
 }
 
 template <typename T> void Stack<T>::clear() {
-  if (this->crr_size == nullptr)
+  if (this->crr_size == 0)
     return;
 
   Node<T> *aux;
   while (this->stack_top != nullptr) {
     aux = this->stack_top;
-    this->stack_top = this->stack_top.next;
+    this->stack_top = this->stack_top->next;
     delete (aux);
   }
 }
