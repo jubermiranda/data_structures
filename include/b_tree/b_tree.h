@@ -1,34 +1,39 @@
 #pragma once
 
+#include "node.h"
 #include <iostream>
 
-template <typename Data>
-class b_tree {
+namespace MY_DS {
+
+template <typename Data> class b_tree {
 private:
-    BTNode<Data> *root;
-    size_t node_count = 0;
+  BTNode<Data> *root;
+  size_t node_count = 0;
 
 public:
-    b_tree() : root(nullptr) {}
-    b_tree(const Data &data);
+  b_tree() : root(nullptr) {}
+  b_tree(const Data &data);
 
-    bool empty() const;
+  bool empty() const;
 
-    size_t size() const;
-    size_t height() const;
+  size_t size() const;
+  size_t height() const;
 
-    void insert(const Data &data);
-    void remove(const Data &data);
-    void clear();
+  void insert(const Data &data);
+  void remove(const Data &data);
+  void clear();
 
-    BTNode<Data> *find(const Data &data) const;
+  BTNode<Data> *find(const Data &data) const;
 
-    // stream operator for development and debugging
-    friend std::ostream &operator<<(std::ostream &os, const b_tree<Data> &tree);
+  // stream operator for development and debugging
+  friend std::ostream &operator<<(std::ostream &os, const b_tree<Data> &tree);
 
+  // private auxiliary methods
 private:
-    // private constructor for creating a tree from an existing root node
-    b_tree(BTNode<Data> *root) : root(root) {}
+  b_tree(BTNode<Data> *root) : root(root) {}
+  size_t get_node_height(BTNode<Data> *node) const;
 };
 
-#include "b_tree_node.tpp"
+} // namespace MY_DS
+
+#include "b_tree.tpp"
