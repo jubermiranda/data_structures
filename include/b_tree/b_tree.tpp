@@ -23,7 +23,42 @@ template <typename Data> size_t b_tree<Data>::height() const {
 }
 
 template <typename Data> void b_tree<Data>::insert(const Data &data) {
-  throw std::runtime_error("Insert not implemented yet");
+  if (this->empty()) {
+    this->root = new BTNode<Data>(data);
+    node_count++;
+    return;
+  }
+
+  BTNode<Data> *current = this->root;
+  while (true) {
+    if (data < current->data) {
+      if (current->left == nullptr) {
+        current->left = new BTNode<Data>(data);
+        node_count++;
+        return;
+      } else {
+        current = current->left;
+      }
+    } else if (data > current->data) {
+      if (current->right == nullptr) {
+        current->right = new BTNode<Data>(data);
+        node_count++;
+        return;
+      } else {
+        current = current->right;
+      }
+    } else {
+      // data already exists in the tree
+      return;
+    }
+  }
+}
+
+template <typename Data> void b_tree<Data>::remove(const Data &data) {
+  if (this->empty()) {
+    return; // nothing to remove
+  }
+  throw std::runtime_error("Remove operation not implemented yet");
 }
 
 } // namespace MY_DS
