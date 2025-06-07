@@ -6,7 +6,7 @@ using namespace MY_DS;
 
 TEST(BinaryTreeTest, EmptyTree) {
   b_tree<int> tree = b_tree<int>();
-  EXPECT_TRUE(tree.empty());
+  EXPECT_TRUE(tree.is_empty());
 }
 
 TEST(BinaryTreeTest, InsertAndSize) {
@@ -31,7 +31,7 @@ TEST(BinaryTreeTest, PrintBtreeAfterInserts) {
   tree.insert(7);
 
   std::ostringstream oss;
-  oss << tree;
+  oss << tree.to_string();
 
   EXPECT_EQ(oss.str(), "4\n2\n1\n3\n6\n5\n7\n");
 }

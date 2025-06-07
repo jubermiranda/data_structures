@@ -1,13 +1,14 @@
 #pragma once
 
-#include <cstddef>
 #include "iterator.h"
+#include "node.h"
+
+#include <cstddef>
 
 namespace MY_DS {
 
 template <typename T> class List {
 private:
-#include "../node.h"
 public:
   friend class iterator<T>;
 
@@ -29,10 +30,10 @@ public:
   iterator<T> insert(iterator<T> pos, const T &item);
   iterator<T> erase(iterator<T> pos);
 
-  T& front();
-  const T& front() const;
-  T& back();
-  const T& back() const;
+  T &front();
+  const T &front() const;
+  T &back();
+  const T &back() const;
   iterator<T> begin();
   const_iterator<T> begin() const;
   iterator<T> end();
@@ -44,15 +45,12 @@ public:
 
   void clear();
 
-  bool operator==(const List<T>&) const ;
-  bool operator==(void *) const ;
-  bool operator!=(const List<T>&) const ;
-  bool operator!=(void *) const ;
-
+  bool operator==(const List<T> &) const;
+  bool operator==(void *) const;
+  bool operator!=(const List<T> &) const;
+  bool operator!=(void *) const;
 };
 
 #include "list_iter/list.tpp"
 
 } // namespace MY_DS
-
-

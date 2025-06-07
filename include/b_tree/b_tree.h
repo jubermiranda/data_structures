@@ -1,7 +1,11 @@
 #pragma once
 
+#include <cstddef>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+
 #include "node.h"
-#include <iostream>
 
 namespace MY_DS {
 
@@ -11,9 +15,21 @@ private:
 
 public:
   b_tree() : root(nullptr) {}
-  b_tree(const Data &data);
+  b_tree(
+      const Data &data,
+      const b_tree<Data> &left = b_tree<Data>(),
+      const b_tree<Data> &right = b_tree<Data>()
+  ) : root(new BTNode<Data>(data, left.root, right.root)) {};
+  virtual ~b_tree() {}
 
-  bool empty() const;
+  b_tree<Data> get_left_subtree() const;
+  b_tree<Data> get_right_subtree() const;
+
+  const Data &get_data() const;
+
+  bool is_empty() const;
+  bool is_leaf() const;
+  virtual std::string to_string() const;
 
   size_t size() const;
   size_t height() const;
@@ -24,15 +40,12 @@ public:
 
   BTNode<Data> *find(const Data &data) const;
 
-  // stream operator for development and debugging
-  friend std::ostream &operator<<(std::ostream &os, const b_tree<Data> &tree);
-
-  // private auxiliary methods
-private:
+protected:
   b_tree(BTNode<Data> *root) : root(root) {}
+
+private:
   size_t get_node_height(BTNode<Data> *node) const;
 };
 
-} // namespace MY_DS
-
+}; // namespace MY_DS
 #include "b_tree.tpp"

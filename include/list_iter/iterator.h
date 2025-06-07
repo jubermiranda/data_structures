@@ -1,11 +1,11 @@
 #pragma once
 
+#include "node.h"
 #include <stdexcept>
 
 namespace MY_DS {
 
 template <typename T> class List;
-template <typename T> class DNode;
 
 template <typename T> class iterator {
   friend class MY_DS::List<T>;

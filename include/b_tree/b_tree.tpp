@@ -2,19 +2,17 @@
 
 #include "b_tree.h"
 #include "node.h"
+#include <cstdio>
 
 namespace MY_DS {
 
-template <typename Data> b_tree<Data>::b_tree(const Data &data) {
-  root = new BTNode<Data>(data);
-}
-
-template <typename Data> bool b_tree<Data>::empty() const {
+template <typename Data> bool b_tree<Data>::is_empty() const {
   return this->root == nullptr;
 }
 
 template <typename Data> size_t b_tree<Data>::size() const {
   // TODO: impl
+  return 0;
 }
 
 template <typename Data> size_t b_tree<Data>::height() const {
@@ -22,7 +20,7 @@ template <typename Data> size_t b_tree<Data>::height() const {
 }
 
 template <typename Data> void b_tree<Data>::insert(const Data &data) {
-  if (this->empty()) {
+  if (this->is_empty()) {
     this->root = new BTNode<Data>(data);
     return;
   }
@@ -53,15 +51,35 @@ template <typename Data> void b_tree<Data>::insert(const Data &data) {
 }
 
 template <typename Data> void b_tree<Data>::remove(const Data &data) {
-  if (this->empty()) {
+  if (this->is_empty()) {
     return; // nothing to remove
   }
   throw std::runtime_error("Remove operation not implemented yet");
 }
 
-} // namespace MY_DS
-
-template <typename Data>
-std::ostream &operator<<(std::ostream &os, const MY_DS::b_tree<Data> &tree) {
-  return os << tree.to_string();
+template <typename Data> std::string b_tree<Data>::to_string() const {
+  if (this->is_empty()) {
+    return "Empty Tree";
+  }
+  std::ostringstream os;
+  os << *this->root << std::endl;
+  os << this->get_left_subtree().to_string() << std::endl;
+  os << this->get_right_subtree().to_string() << std::endl;
+  return os.str();
 }
+
+template <typename Data> b_tree<Data> b_tree<Data>::get_left_subtree() const {
+  if(this->is_empty())
+    throw std::invalid_argument("Cannot get left subtree of an empty tree");
+  return b_tree<Data>(this->root->left);
+}
+
+template<typename Data> b_tree<Data> b_tree<Data>::get_right_subtree() const {
+  if(this->is_empty()){
+    throw std::invalid_argument("Cannot get right subtree of an empty tree");
+  }
+  return b_tree<Data>(this->root->right);
+}
+
+
+} // namespace MY_DS

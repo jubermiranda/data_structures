@@ -1,7 +1,5 @@
 #pragma once
 
-#include <ostream>
-#include <sstream>
 template <typename Data> class Node {
 public:
   Data data;
@@ -22,6 +20,9 @@ public:
       : data(value), next(next_node), prev(prev_node) {};
 };
 
+#include <ostream>
+#include <sstream>
+
 template <typename Data> class BTNode {
 public:
   Data data;
@@ -34,7 +35,7 @@ public:
   virtual ~BTNode() {}
   virtual std::string to_string() const {
     std::ostringstream os;
-    os << data;
+    os << this->data;
     return os.str();
   }
 };
