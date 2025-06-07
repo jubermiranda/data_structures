@@ -60,3 +60,8 @@ template <typename Data> void b_tree<Data>::remove(const Data &data) {
 }
 
 } // namespace MY_DS
+
+template <typename Data>
+std::ostream &operator<<(std::ostream &os, const MY_DS::b_tree<Data> &tree) {
+  return os << tree.to_string();
+}
