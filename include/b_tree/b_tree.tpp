@@ -7,7 +7,6 @@ namespace MY_DS {
 
 template <typename Data> b_tree<Data>::b_tree(const Data &data) {
   root = new BTNode<Data>(data);
-  node_count = 1;
 }
 
 template <typename Data> bool b_tree<Data>::empty() const {
@@ -15,7 +14,7 @@ template <typename Data> bool b_tree<Data>::empty() const {
 }
 
 template <typename Data> size_t b_tree<Data>::size() const {
-  return node_count;
+  // TODO: impl
 }
 
 template <typename Data> size_t b_tree<Data>::height() const {
@@ -25,7 +24,6 @@ template <typename Data> size_t b_tree<Data>::height() const {
 template <typename Data> void b_tree<Data>::insert(const Data &data) {
   if (this->empty()) {
     this->root = new BTNode<Data>(data);
-    node_count++;
     return;
   }
 
@@ -34,18 +32,18 @@ template <typename Data> void b_tree<Data>::insert(const Data &data) {
     if (data < current->data) {
       if (current->left == nullptr) {
         current->left = new BTNode<Data>(data);
-        node_count++;
         return;
       } else {
         current = current->left;
+        continue;
       }
     } else if (data > current->data) {
       if (current->right == nullptr) {
         current->right = new BTNode<Data>(data);
-        node_count++;
         return;
       } else {
         current = current->right;
+        continue;
       }
     } else {
       // data already exists in the tree

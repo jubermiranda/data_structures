@@ -8,7 +8,6 @@ namespace MY_DS {
 template <typename Data> class b_tree {
 private:
   BTNode<Data> *root;
-  size_t node_count = 0;
 
 public:
   b_tree() : root(nullptr) {}
