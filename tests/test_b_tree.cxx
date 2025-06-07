@@ -31,7 +31,7 @@ TEST(BinaryTreeTest, PrintBtreeAfterInserts) {
   tree.insert(7);
 
   std::ostringstream oss;
-  oss << tree.to_string();
+  oss << tree;
 
   EXPECT_EQ(oss.str(), "4\n2\n1\n3\n6\n5\n7\n");
 }

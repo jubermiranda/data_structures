@@ -47,5 +47,13 @@ private:
   size_t get_node_height(BTNode<Data> *node) const;
 };
 
+template<typename Data> std::ostream& operator<<(
+    std::ostream& out,
+    const b_tree<Data>& tree
+) {
+  return out << tree.to_string();
+}
+
+
 }; // namespace MY_DS
 #include "b_tree.tpp"
