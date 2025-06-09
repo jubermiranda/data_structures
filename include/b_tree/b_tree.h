@@ -55,9 +55,7 @@ protected:
   b_tree(BTNode<Data> *root) : root(root) {}
 
 private:
-
-  friend std::ostream& operator<< <Data>(std::ostream& out, const b_tree<Data>& tree);
-
+  size_t size_of_tree(const b_tree<Data>&) const;
 };
 
 template<typename Data> std::ostream& operator<<(

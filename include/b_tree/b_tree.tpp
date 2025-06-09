@@ -2,7 +2,9 @@
 
 #include "b_tree.h"
 #include "node.h"
+#include <cstddef>
 #include <cstdio>
+#include <sys/types.h>
 
 namespace MY_DS {
 
@@ -11,8 +13,7 @@ template <typename Data> bool b_tree<Data>::is_empty() const {
 }
 
 template <typename Data> size_t b_tree<Data>::size() const {
-  // TODO: impl
-  return 0;
+  return this->size_of_tree(this->root);
 }
 
 
@@ -57,19 +58,19 @@ template <typename Data> void b_tree<Data>::remove(const Data &data) {
 template <typename Data> 
 std::string b_tree<Data>::to_string(tree_print_mode mode) const {
   if (this->is_empty()) {
-    return "Empty Tree";
+    return "";
   }
   std::ostringstream out;
 
   if(mode == tree_print_mode::PRE_ORDER)
     out << *this->root << std::endl;  
 
-  out << this->get_left_subtree().to_string(mode) << std::endl;
+  out << this->get_left_subtree().to_string(mode);
 
   if(mode == tree_print_mode::ORDER)
     out << *this->root << std::endl;  
 
-  out << this->get_right_subtree().to_string(mode) << std::endl;
+  out << this->get_right_subtree().to_string(mode);
 
   if(mode == tree_print_mode::POST_ORDER)
     out << *this->root << std::endl;  
@@ -88,6 +89,15 @@ template<typename Data> b_tree<Data> b_tree<Data>::get_right_subtree() const {
     throw std::invalid_argument("Cannot get right subtree of an empty tree");
   }
   return b_tree<Data>(this->root->right);
+}
+
+template <typename Data> size_t b_tree<Data>::size_of_tree(const b_tree<Data>& crr_root) const{
+  if(crr_root.root == nullptr)
+    return 0;
+
+  return 1 
+    + this->size_of_tree(crr_root.root->left)
+    + this->size_of_tree(crr_root.root->right);
 }
 
 
