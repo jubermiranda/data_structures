@@ -54,15 +54,27 @@ template <typename Data> void b_tree<Data>::remove(const Data &data) {
   throw std::runtime_error("Remove operation not implemented yet");
 }
 
-template <typename Data> std::string b_tree<Data>::to_string() const {
+template <typename Data> 
+std::string b_tree<Data>::to_string(tree_print_mode mode) const {
   if (this->is_empty()) {
     return "Empty Tree";
   }
-  std::ostringstream os;
-  os << *this->root << std::endl;
-  os << this->get_left_subtree().to_string() << std::endl;
-  os << this->get_right_subtree().to_string() << std::endl;
-  return os.str();
+  std::ostringstream out;
+
+  if(mode == tree_print_mode::PRE_ORDER)
+    out << *this->root << std::endl;  
+
+  out << this->get_left_subtree().to_string(mode) << std::endl;
+
+  if(mode == tree_print_mode::ORDER)
+    out << *this->root << std::endl;  
+
+  out << this->get_right_subtree().to_string(mode) << std::endl;
+
+  if(mode == tree_print_mode::POST_ORDER)
+    out << *this->root << std::endl;  
+
+  return out.str();
 }
 
 template <typename Data> b_tree<Data> b_tree<Data>::get_left_subtree() const {

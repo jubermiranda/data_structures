@@ -7,6 +7,20 @@
 
 namespace MY_DS {
 
+enum class tree_print_mode {
+  PRE_ORDER,
+  ORDER,
+  POST_ORDER
+};
+
+struct print_mode {
+  tree_print_mode mode;
+};
+
+inline print_mode pre_order { tree_print_mode::PRE_ORDER };
+inline print_mode order { tree_print_mode::ORDER };
+inline print_mode post_order { tree_print_mode::POST_ORDER };
+
 template <typename Data> class b_tree {
 private:
   BTNode<Data> *root;
@@ -27,7 +41,9 @@ public:
 
   bool is_empty() const;
   bool is_leaf() const;
-  virtual std::string to_string() const;
+  virtual std::string to_string(
+      tree_print_mode mode = tree_print_mode::ORDER
+  ) const;
 
   size_t size() const;
 
@@ -38,6 +54,10 @@ public:
 protected:
   b_tree(BTNode<Data> *root) : root(root) {}
 
+private:
+
+  friend std::ostream& operator<< <Data>(std::ostream& out, const b_tree<Data>& tree);
+
 };
 
 template<typename Data> std::ostream& operator<<(
@@ -46,6 +66,21 @@ template<typename Data> std::ostream& operator<<(
   return out << tree.to_string();
 }
 
+// -- print mode functions
+
+inline int print_mode_index(){
+  static int index = std::ios_base::xalloc();
+  return index;
+}
+
+inline std::ostream &operator<<(std::ostream &os, print_mode mode) {
+    os.iword(print_mode_index()) = static_cast<long>(mode.mode);
+    return os;
+}
+
+inline tree_print_mode get_print_mode(std::ostream &os) {
+    return static_cast<tree_print_mode>(os.iword(print_mode_index()));
+}
 
 }; // namespace MY_DS
 #include "b_tree.tpp"

@@ -24,14 +24,14 @@ TEST(BinaryTreeTest, PrintBtreeAfterInserts) {
   b_tree<int> tree;
   tree.insert(4);
   tree.insert(2);
-  tree.insert(6);
   tree.insert(1);
-  tree.insert(3);
   tree.insert(5);
+  tree.insert(3);
+  tree.insert(6);
   tree.insert(7);
 
   std::ostringstream oss;
   oss << tree;
 
-  EXPECT_EQ(oss.str(), "4\n2\n1\n3\n6\n5\n7\n");
+  EXPECT_EQ(oss.str(), "1\n2\n3\n4\n5\n6\n7\n");
 }
