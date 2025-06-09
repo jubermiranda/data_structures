@@ -1,8 +1,6 @@
 #pragma once
 
 #include <cstddef>
-#include <sstream>
-#include <stdexcept>
 #include <string>
 
 #include "node.h"
@@ -32,25 +30,19 @@ public:
   virtual std::string to_string() const;
 
   size_t size() const;
-  size_t height() const;
 
   void insert(const Data &data);
   void remove(const Data &data);
   void clear();
 
-  BTNode<Data> *find(const Data &data) const;
-
 protected:
   b_tree(BTNode<Data> *root) : root(root) {}
 
-private:
-  size_t get_node_height(BTNode<Data> *node) const;
 };
 
 template<typename Data> std::ostream& operator<<(
-    std::ostream& out,
-    const b_tree<Data>& tree
-) {
+    std::ostream& out,const b_tree<Data>& tree
+){
   return out << tree.to_string();
 }
 

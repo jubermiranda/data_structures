@@ -15,9 +15,6 @@ template <typename Data> size_t b_tree<Data>::size() const {
   return 0;
 }
 
-template <typename Data> size_t b_tree<Data>::height() const {
-  return root ? (this->get_node_height(this->root)) : 0;
-}
 
 template <typename Data> void b_tree<Data>::insert(const Data &data) {
   if (this->is_empty()) {
