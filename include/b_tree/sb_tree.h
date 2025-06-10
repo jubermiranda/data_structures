@@ -9,8 +9,8 @@ template <typename Data>class sb_tree : public b_tree<Data> {
 public:
   sb_tree<Data>() : b_tree<Data>(){}
 
-  virtual void insert(const Data &data);
-  virtual void remove(const Data &data);
+  virtual bool insert(const Data &data);
+  virtual bool remove(const Data &data);
   const Data* find(const Data& target) const;
 
 private:

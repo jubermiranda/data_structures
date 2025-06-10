@@ -6,10 +6,10 @@
 
 namespace MY_DS {
 
-template <typename Data> void sb_tree<Data>::insert(const Data &data) {
+template <typename Data> bool sb_tree<Data>::insert(const Data &data) {
   if (this->is_empty()) {
     this->root = new BTNode<Data>(data);
-    return;
+    return false;
   }
 
   BTNode<Data> *current = this->root;
@@ -17,7 +17,7 @@ template <typename Data> void sb_tree<Data>::insert(const Data &data) {
     if (data < current->data) {
       if (current->left == nullptr) {
         current->left = new BTNode<Data>(data);
-        return;
+        return true;
       } else {
         current = current->left;
         continue;
@@ -25,20 +25,20 @@ template <typename Data> void sb_tree<Data>::insert(const Data &data) {
     } else if (data > current->data) {
       if (current->right == nullptr) {
         current->right = new BTNode<Data>(data);
-        return;
+        return true;
       } else {
         current = current->right;
         continue;
       }
     } else {
-      return;
+      return false;
     }
   }
 }
 
-template <typename Data> void sb_tree<Data>::remove(const Data &data) {
+template <typename Data> bool sb_tree<Data>::remove(const Data &data) {
   if (this->is_empty()) {
-    return;
+    return false;
   }
   throw std::runtime_error("Remove operation not implemented yet");
 }
