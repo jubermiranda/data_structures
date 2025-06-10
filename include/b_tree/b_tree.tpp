@@ -63,17 +63,17 @@ std::string b_tree<Data>::to_string(tree_print_mode mode) const {
   std::ostringstream out;
 
   if(mode == tree_print_mode::PRE_ORDER)
-    out << *this->root << std::endl;  
+    out << *this->root << "\n";
 
   out << this->get_left_subtree().to_string(mode);
 
   if(mode == tree_print_mode::ORDER)
-    out << *this->root << std::endl;  
+    out << *this->root << "\n";
 
   out << this->get_right_subtree().to_string(mode);
 
   if(mode == tree_print_mode::POST_ORDER)
-    out << *this->root << std::endl;  
+    out << *this->root << "\n";
 
   return out.str();
 }

@@ -8,8 +8,8 @@
 namespace MY_DS {
 
 enum class tree_print_mode {
-  PRE_ORDER,
   ORDER,
+  PRE_ORDER,
   POST_ORDER
 };
 
@@ -20,6 +20,10 @@ struct print_mode {
 inline print_mode pre_order { tree_print_mode::PRE_ORDER };
 inline print_mode order { tree_print_mode::ORDER };
 inline print_mode post_order { tree_print_mode::POST_ORDER };
+inline int print_mode_index();
+inline std::ostream &operator<<(std::ostream &, print_mode);
+inline tree_print_mode get_print_mode(std::ostream &);
+
 
 template <typename Data> class b_tree {
 private:
@@ -61,7 +65,7 @@ private:
 template<typename Data> std::ostream& operator<<(
     std::ostream& out,const b_tree<Data>& tree
 ){
-  return out << tree.to_string();
+  return out << tree.to_string(get_print_mode(out));
 }
 
 // -- print mode functions
@@ -77,7 +81,7 @@ inline std::ostream &operator<<(std::ostream &os, print_mode mode) {
 }
 
 inline tree_print_mode get_print_mode(std::ostream &os) {
-    return static_cast<tree_print_mode>(os.iword(print_mode_index()));
+  return static_cast<tree_print_mode>(os.iword(print_mode_index()));
 }
 
 }; // namespace MY_DS
