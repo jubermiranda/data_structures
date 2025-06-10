@@ -49,7 +49,6 @@ template <typename Data> void b_tree<Data>::insert(const Data &data) {
         continue;
       }
     } else {
-      // data already exists in the tree
       return;
     }
   }
@@ -57,9 +56,16 @@ template <typename Data> void b_tree<Data>::insert(const Data &data) {
 
 template <typename Data> void b_tree<Data>::remove(const Data &data) {
   if (this->is_empty()) {
-    return; // nothing to remove
+    return;
   }
   throw std::runtime_error("Remove operation not implemented yet");
+}
+
+template <typename Data> bool b_tree<Data>::is_leaf() const {
+  if (this->is_empty()) {
+    return false;
+  }
+  return this->root->left == nullptr && this->root->right == nullptr;
 }
 
 template <typename Data> 
