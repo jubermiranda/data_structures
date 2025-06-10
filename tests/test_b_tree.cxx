@@ -9,6 +9,26 @@ TEST(BinaryTreeTest, EmptyTree) {
   EXPECT_TRUE(tree.is_empty());
 }
 
+TEST(BinaryTreeTest, NonEmptyTree) {
+  b_tree<int> tree;
+  tree.insert(41);
+  EXPECT_FALSE(tree.is_empty());
+
+  tree.get_data() + 1;
+}
+
+TEST(BinaryTreeTest, InsertAndCheckData) {
+  b_tree<int> tree;
+  tree.insert(4);
+  EXPECT_EQ(tree.get_data(), 4);
+
+  tree.insert(2);
+  EXPECT_EQ(tree.get_left_subtree().get_data(), 2);
+
+  tree.insert(6);
+  EXPECT_EQ(tree.get_right_subtree().get_data(), 6);
+}
+
 TEST(BinaryTreeTest, InsertAndSize) {
   b_tree<int> tree;
   EXPECT_EQ(tree.size(), 0);

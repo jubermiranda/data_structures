@@ -16,6 +16,13 @@ template <typename Data> size_t b_tree<Data>::size() const {
   return this->size_of_tree(this->root);
 }
 
+template <typename Data> const Data &b_tree<Data>::get_data() const {
+  if (this->is_empty()) {
+    throw std::invalid_argument("Cannot get data from an empty tree");
+  }
+  return this->root->data;
+}
+
 
 template <typename Data> void b_tree<Data>::insert(const Data &data) {
   if (this->is_empty()) {
