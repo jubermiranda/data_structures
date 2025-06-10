@@ -56,6 +56,12 @@ TEST(BinaryTreeTest, IsLeaf) {
   EXPECT_TRUE(tree.get_left_subtree().get_left_subtree().is_leaf());
 }
 
+TEST(BinaryTreeTest, RemoveNotImplemented) {
+  b_tree<int> tree;
+  tree.insert(4);
+  EXPECT_THROW(tree.remove(4), std::runtime_error);
+}
+
 TEST(BinaryTreeTest, PrintBtreeAfterInserts) {
   b_tree<int> tree;
 
