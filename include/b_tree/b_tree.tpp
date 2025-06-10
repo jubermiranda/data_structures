@@ -24,43 +24,6 @@ template <typename Data> const Data &b_tree<Data>::get_data() const {
 }
 
 
-template <typename Data> void b_tree<Data>::insert(const Data &data) {
-  if (this->is_empty()) {
-    this->root = new BTNode<Data>(data);
-    return;
-  }
-
-  BTNode<Data> *current = this->root;
-  while (true) {
-    if (data < current->data) {
-      if (current->left == nullptr) {
-        current->left = new BTNode<Data>(data);
-        return;
-      } else {
-        current = current->left;
-        continue;
-      }
-    } else if (data > current->data) {
-      if (current->right == nullptr) {
-        current->right = new BTNode<Data>(data);
-        return;
-      } else {
-        current = current->right;
-        continue;
-      }
-    } else {
-      return;
-    }
-  }
-}
-
-template <typename Data> void b_tree<Data>::remove(const Data &data) {
-  if (this->is_empty()) {
-    return;
-  }
-  throw std::runtime_error("Remove operation not implemented yet");
-}
-
 template <typename Data> bool b_tree<Data>::is_leaf() const {
   if (this->is_empty()) {
     return false;

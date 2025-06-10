@@ -1,0 +1,25 @@
+#pragma once
+
+#include "node.h"
+#include "b_tree.h"
+
+namespace MY_DS{
+
+template <typename Data>class sb_tree : public b_tree<Data> {
+public:
+  sb_tree<Data>() : b_tree<Data>(){}
+
+  virtual void insert(const Data &data);
+  virtual void remove(const Data &data);
+  const Data* find(const Data& target) const;
+
+private:
+  virtual bool insert(BTNode<Data>*& crr_root, const Data& target);
+  virtual bool erase(BTNode<Data>*& crr_root, const Data& target);
+  const Data*  find(BTNode<Data>* crr_root, const Data& target) const;
+
+  void replace_root(BTNode<Data>*& old_root, BTNode<Data>*& crr_root);
+};
+
+};
+
