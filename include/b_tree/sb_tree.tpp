@@ -2,6 +2,7 @@
 
 #include "node.h"
 #include "sb_tree.h"
+#include <stdexcept>
 
 namespace MY_DS {
 
@@ -42,5 +43,20 @@ template <typename Data> void sb_tree<Data>::remove(const Data &data) {
   throw std::runtime_error("Remove operation not implemented yet");
 }
 
+template <typename Data> bool sb_tree<Data>::insert(BTNode<Data>*& crr_root, const Data& target){
+  throw new std::runtime_error("not impl");
+}
+
+template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, const Data& target){
+  throw new std::runtime_error("not impl");
+}
+
+template <typename Data> const Data* sb_tree<Data>::find(BTNode<Data>* crr_root, const Data& target) const{
+  throw new std::runtime_error("not impl");
+}
+
+template <typename Data> void replace_root(BTNode<Data>*& old_root, BTNode<Data>*& crr_root){
+  throw new std::runtime_error("not impl");
+}
 
 };

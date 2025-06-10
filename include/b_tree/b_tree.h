@@ -26,8 +26,9 @@ inline tree_print_mode get_print_mode(std::ostream &);
 
 
 template <typename Data> class b_tree {
-private:
+protected:
   BTNode<Data> *root;
+  b_tree(BTNode<Data> *root) : root(root) {}
 
 public:
   b_tree() : root(nullptr) {}
@@ -51,12 +52,8 @@ public:
 
   size_t size() const;
 
-  void insert(const Data &data);
-  void remove(const Data &data);
   void clear();
 
-protected:
-  b_tree(BTNode<Data> *root) : root(root) {}
 
 private:
   size_t size_of_tree(const b_tree<Data>&) const;
