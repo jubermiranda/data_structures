@@ -56,10 +56,23 @@ TEST(BinaryTreeTest, IsLeaf) {
   EXPECT_TRUE(tree.get_left_subtree().get_left_subtree().is_leaf());
 }
 
-TEST(BinaryTreeTest, RemoveNotImplemented) {
+TEST(BinaryTreeTest, RemoveLeafNode) {
   b_tree<int> tree;
   tree.insert(4);
-  EXPECT_THROW(tree.remove(4), std::runtime_error);
+  tree.insert(2);
+  tree.insert(6);
+  tree.insert(1);
+  tree.insert(3);
+  ASSERT_EQ(tree.size(), 5);
+  
+  ASSERT_EQ(tree.get_left_subtree().size(), 3);
+  tree.remove(1);
+  EXPECT_EQ(tree.get_left_subtree().size(), 2);
+  tree.remove(3);
+  EXPECT_EQ(tree.get_left_subtree().size(), 1);
+  
+  // other types of removals are not implemented yet
+  ASSERT_THROW(tree.remove(4), std::runtime_error);
 }
 
 TEST(BinaryTreeTest, PrintBtreeAfterInserts) {
