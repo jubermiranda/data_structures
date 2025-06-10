@@ -11,10 +11,8 @@ TEST(BinaryTreeTest, EmptyTree) {
 
 TEST(BinaryTreeTest, NonEmptyTree) {
   b_tree<int> tree;
-  tree.insert(41);
+  tree.insert(41); // + 1
   EXPECT_FALSE(tree.is_empty());
-
-  tree.get_data() + 1;
 }
 
 TEST(BinaryTreeTest, InsertAndCheckData) {
@@ -38,6 +36,24 @@ TEST(BinaryTreeTest, InsertAndSize) {
 
   tree.insert(2);
   EXPECT_EQ(tree.size(), 2);
+}
+
+TEST(BinaryTreeTest, IsLeaf) {
+  b_tree<int> tree;
+  tree.insert(4);
+  EXPECT_TRUE(tree.is_leaf());
+
+  tree.insert(2);
+  EXPECT_FALSE(tree.is_leaf());
+
+  tree.insert(6);
+  EXPECT_FALSE(tree.is_leaf());
+  EXPECT_TRUE(tree.get_left_subtree().is_leaf());
+  EXPECT_TRUE(tree.get_right_subtree().is_leaf());
+
+  tree.get_left_subtree().insert(1);
+  EXPECT_FALSE(tree.get_left_subtree().is_leaf());
+  EXPECT_TRUE(tree.get_left_subtree().get_left_subtree().is_leaf());
 }
 
 TEST(BinaryTreeTest, PrintBtreeAfterInserts) {
