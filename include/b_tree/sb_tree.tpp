@@ -60,8 +60,15 @@ template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, cons
   if( crr_root->is_leaf() ){
     delete(crr_root);
     crr_root = nullptr;
-  } else {
-    throw new std::runtime_error("this type of removal is not implemented yet");
+
+  } else if(crr_root->left == nullptr) {
+    BTNode<Data> *to_delete = crr_root;
+    crr_root = crr_root->right;
+    delete(to_delete);
+  } else if(crr_root->right == nullptr){
+    BTNode<Data> *to_delete = crr_root;
+    crr_root = crr_root->left;
+    delete(to_delete);
   }
 }
 
