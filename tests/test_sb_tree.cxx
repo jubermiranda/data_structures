@@ -60,14 +60,38 @@ TEST(SearchBinaryTreeTest, RemoveLeafNode) {
   tree.insert(3);
   ASSERT_EQ(tree.size(), 5);
 
-  ASSERT_EQ(tree.get_left_subtree().size(), 3);
   tree.erase(1);
-  EXPECT_EQ(tree.get_left_subtree().size(), 2);
-  tree.erase(3);
-  EXPECT_EQ(tree.get_left_subtree().size(), 1);
+  ASSERT_EQ(tree.size(), 4);
 
-  // other types of removals are not implemented yet
-  ASSERT_THROW(tree.erase(4), std::runtime_error);
+  tree.erase(3);
+  ASSERT_EQ(tree.size(), 3);
+
+  tree.erase(6);
+  ASSERT_EQ(tree.size(), 2);
+}
+
+TEST(SearchBinaryTreeTest, RemoveSingleChildNode){
+  sb_tree<int> tree;
+  tree.insert(5);
+  tree.insert(4);
+  tree.insert(6);
+
+  // left child of node 4
+  tree.insert(2);
+  tree.insert(1);
+  tree.insert(3);
+
+
+  // right child of node 6
+  tree.insert(7);
+
+  ASSERT_EQ(tree.size(), 7);
+
+  tree.erase(4);
+  ASSERT_EQ(tree.size(), 6);
+
+  tree.erase(6);
+  ASSERT_EQ(tree.size(), 5);
 }
 
 TEST(SearchBinaryTreeTest, PrintBtreeAfterInserts) {
