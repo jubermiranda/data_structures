@@ -7,24 +7,33 @@
 namespace MY_DS {
 
 template <typename Data> bool sb_tree<Data>::insert(const Data &data) {
+  return this->insert(this->root, data);
+}
+
+template <typename Data> bool sb_tree<Data>::erase(const Data &data) {
+  
+  return this->erase(this->root, data);
+}
+
+template <typename Data> bool sb_tree<Data>::insert(BTNode<Data>*& crr_root, const Data& target){
   if (this->is_empty()) {
-    this->root = new BTNode<Data>(data);
+    this->root = new BTNode<Data>(target);
     return false;
   }
 
   BTNode<Data> *current = this->root;
   while (true) {
-    if (data < current->data) {
+    if (target < current->data) {
       if (current->left == nullptr) {
-        current->left = new BTNode<Data>(data);
+        current->left = new BTNode<Data>(target);
         return true;
       } else {
         current = current->left;
         continue;
       }
-    } else if (data > current->data) {
+    } else if (target > current->data) {
       if (current->right == nullptr) {
-        current->right = new BTNode<Data>(data);
+        current->right = new BTNode<Data>(target);
         return true;
       } else {
         current = current->right;
@@ -36,19 +45,18 @@ template <typename Data> bool sb_tree<Data>::insert(const Data &data) {
   }
 }
 
-template <typename Data> bool sb_tree<Data>::remove(const Data &data) {
+template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, const Data& target){
   if (this->is_empty()) {
     return false;
   }
-  throw std::runtime_error("Remove operation not implemented yet");
-}
 
-template <typename Data> bool sb_tree<Data>::insert(BTNode<Data>*& crr_root, const Data& target){
-  throw new std::runtime_error("not impl");
-}
+  if(target < crr_root->data){
+    return this->erase(crr_root->left, target);
+  }
+  if(target > crr_root->data){
+    return this->erase(crr_root->right, target);
+  }
 
-template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, const Data& target){
-  throw new std::runtime_error("not impl");
 }
 
 template <typename Data> const Data* sb_tree<Data>::find(BTNode<Data>* crr_root, const Data& target) const{
