@@ -38,6 +38,10 @@ public:
     os << this->data;
     return os.str();
   }
+
+  bool is_leaf() const {
+    return (left == nullptr && right == nullptr);
+  }
 };
 
 template <typename Data>

@@ -57,6 +57,12 @@ template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, cons
     return this->erase(crr_root->right, target);
   }
 
+  if( crr_root->is_leaf() ){
+    delete(crr_root);
+    crr_root = nullptr;
+  } else {
+    throw new std::runtime_error("this type of removal is not implemented yet");
+  }
 }
 
 template <typename Data> const Data* sb_tree<Data>::find(BTNode<Data>* crr_root, const Data& target) const{
