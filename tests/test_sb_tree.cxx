@@ -94,6 +94,32 @@ TEST(SearchBinaryTreeTest, RemoveSingleChildNode){
   ASSERT_EQ(tree.size(), 5);
 }
 
+TEST(SearchBinaryTreeTest, RemoveInternalNode){
+  sb_tree<int> tree;
+  tree.insert(5);
+    tree.insert(3);
+      tree.insert(1);
+      tree.insert(2);
+
+    tree.insert(7);
+      tree.insert(6);
+
+      tree.insert(9);
+        tree.insert(8);
+        tree.insert(10);
+  //--
+
+  ASSERT_EQ(tree.size(), 9);
+
+  // try erase node that have only leaf child
+  tree.erase(9);
+  ASSERT_EQ(tree.size(), 8);
+
+  // try erase internal regular node
+  tree.erase(5);
+  ASSERT_EQ(tree.size(), 7);
+}
+
 TEST(SearchBinaryTreeTest, PrintBtreeAfterInserts) {
   sb_tree<int> tree;
 
