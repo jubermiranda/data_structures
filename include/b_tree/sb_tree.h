@@ -10,7 +10,7 @@ public:
   sb_tree<Data>() : b_tree<Data>(){}
 
   virtual bool insert(const Data &data);
-  virtual bool remove(const Data &data);
+  virtual bool erase(const Data &data);
   const Data* find(const Data& target) const;
 
 private:
