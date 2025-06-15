@@ -46,38 +46,42 @@ template <typename Data> bool sb_tree<Data>::insert(BTNode<Data>*& crr_root, con
 }
 
 template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, const Data& target){
-  if (this->is_empty()) {
+  if (this->is_empty())
     return false;
-  }
-
-  if(target < crr_root->data){
+  if(target < crr_root->data)
     return this->erase(crr_root->left, target);
-  }
-  if(target > crr_root->data){
+  if(target > crr_root->data)
     return this->erase(crr_root->right, target);
-  }
 
+  // remove leaf node
   if( crr_root->is_leaf() ){
     delete(crr_root);
     crr_root = nullptr;
-
-  } else if(crr_root->left == nullptr) {
-    BTNode<Data> *to_delete = crr_root;
-    crr_root = crr_root->right;
-    delete(to_delete);
-  } else if(crr_root->right == nullptr){
-    BTNode<Data> *to_delete = crr_root;
-    crr_root = crr_root->left;
-    delete(to_delete);
+    return true;
   }
+
+  BTNode<Data> *to_delete = crr_root;
+  if(crr_root->left == nullptr) {
+    crr_root = crr_root->right;
+  } else if(crr_root->right == nullptr){
+    crr_root = crr_root->left;
+  } else {
+    BTNode<Data>*& replacement = find_replacement(crr_root->left);
+    crr_root->data = replacement->data;
+    to_delete = replacement;
+    replacement = replacement->left;
+  }
+  delete(to_delete);
 }
 
 template <typename Data> const Data* sb_tree<Data>::find(BTNode<Data>* crr_root, const Data& target) const{
   throw new std::runtime_error("not impl");
 }
 
-template <typename Data> void replace_root(BTNode<Data>*& old_root, BTNode<Data>*& crr_root){
-  throw new std::runtime_error("not impl");
+template <typename Data> 
+BTNode<Data>*& sb_tree<Data>::find_replacement(BTNode<Data>*& crr_root){
+  if(crr_root->right == nullptr)
+    return crr_root;
+  return find_replacement(crr_root->right);
 }
-
 };

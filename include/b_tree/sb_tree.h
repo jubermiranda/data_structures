@@ -18,7 +18,7 @@ private:
   virtual bool erase(BTNode<Data>*& crr_root, const Data& target);
   const Data*  find(BTNode<Data>* crr_root, const Data& target) const;
 
-  void replace_root(BTNode<Data>*& old_root, BTNode<Data>*& crr_root);
+  BTNode<Data> *& find_replacement(BTNode<Data>*&);
 };
 
 };
