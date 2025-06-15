@@ -120,6 +120,51 @@ TEST(SearchBinaryTreeTest, RemoveInternalNode){
   ASSERT_EQ(tree.size(), 7);
 }
 
+TEST(SearchBinaryTreeTest, FindElementIntTree){
+  sb_tree<int> tree;
+  tree.insert(5);
+    tree.insert(3);
+      tree.insert(1);
+      tree.insert(2);
+
+    tree.insert(7);
+      tree.insert(6);
+
+      tree.insert(9);
+        tree.insert(8);
+        tree.insert(10);
+
+  //--
+  ASSERT_EQ(tree.size(), 9);
+
+  // try find a leaf element
+  {
+    const int *result =  tree.find(2);
+    ASSERT_FALSE(result == nullptr);
+    EXPECT_EQ(*(result), 2);
+  }
+
+  // try find root element
+  {
+    const int *result =  tree.find(5);
+    ASSERT_FALSE(result == nullptr);
+    EXPECT_EQ(*(result), 5);
+  }
+
+  // try find regular element
+  {
+    const int *result =  tree.find(9);
+    ASSERT_FALSE(result == nullptr);
+    EXPECT_EQ(*(result), 9);
+  }
+
+  // try find missing element
+  {
+    const int *result =  tree.find(4);
+    ASSERT_TRUE(result == nullptr);
+  }
+}
+
 TEST(SearchBinaryTreeTest, PrintBtreeAfterInserts) {
   sb_tree<int> tree;
 
