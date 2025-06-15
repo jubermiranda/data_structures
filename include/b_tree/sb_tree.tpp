@@ -75,7 +75,20 @@ template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, cons
 }
 
 template <typename Data> const Data* sb_tree<Data>::find(const Data& target) const{
-  throw new std::runtime_error("not impl");
+  return this->find(this->root, target);
+}
+
+template <typename Data> const Data* sb_tree<Data>::find(BTNode<Data>* crr_root, const Data& target) const{
+  if(crr_root == nullptr)
+    return nullptr;
+
+  if(target < crr_root->data){
+    return find(crr_root->left, target);
+  } else if( target > crr_root->data){
+    return find(crr_root->right, target);
+  }
+
+  return &(crr_root->data);
 }
 
 template <typename Data> 
