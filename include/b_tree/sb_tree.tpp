@@ -72,6 +72,7 @@ template <typename Data> bool sb_tree<Data>::erase(BTNode<Data>*& crr_root, cons
     replacement = replacement->left;
   }
   delete(to_delete);
+  return true;
 }
 
 template <typename Data> const Data* sb_tree<Data>::find(const Data& target) const{
