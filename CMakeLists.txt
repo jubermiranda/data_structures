@@ -15,6 +15,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include/vector)
 include_directories(${CMAKE_SOURCE_DIR}/include/list_iter)
 include_directories(${CMAKE_SOURCE_DIR}/include/stack)
 include_directories(${CMAKE_SOURCE_DIR}/include/b_tree)
+include_directories(${CMAKE_SOURCE_DIR}/include/heap)
 
 if(BUILD_PROJECT)
     add_executable(
