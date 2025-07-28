@@ -8,14 +8,14 @@ namespace MY_DS {
 
 template <typename Data, typename Order>
 heap<Data, Order>::heap() :
-  heap_tree(nullptr), height(0), crr_pos(0)
+  heap_tree(nullptr), crr_height(0), crr_pos(0)
 {
    this->expand_heap();
 }
 
 template <typename Data, typename Order>
 heap<Data, Order>::heap(std::vector<Data>) :
-  heap_tree(nullptr), height(0), crr_pos(0)
+  heap_tree(nullptr), crr_height(0), crr_pos(0)
 {
   throw new std::runtime_error("not implemented");
 }
