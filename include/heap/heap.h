@@ -5,6 +5,8 @@
 
 namespace MY_DS {
 
+const int MAX_HEIGHT = 32;
+
 template <typename Data, typename Order = std::less<Data>> 
 class heap {
 public:
@@ -23,10 +25,11 @@ public:
 
 private:
   Data **heap_tree;
-  size_t height;
+  size_t crr_height;
   size_t crr_pos;
 
   void expand_heap();
+  size_t calc_max_size () const;
 };
 
 };
