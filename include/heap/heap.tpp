@@ -60,14 +60,25 @@ bool heap<Data, Order>::is_empty() const{
 
 template <typename Data, typename Order>
 void heap<Data, Order>::clear() {
-  throw new std::runtime_error("not implemented");
+  if(this->is_empty())
+    return;
+
+  for(int i=0; i < this->crr_height; i++){
+    delete[] this->heap_tree[i];
+  }
+  delete[] this->heap_tree;
 }
 
 
 // -- private
 template <typename Data, typename Order>
 void heap<Data, Order>::expand_heap() {
-  throw new std::runtime_error("not implemented");
+  if(this->is_empty()){
+    this->heap_tree = new Data*[1];
+    this->heap_tree[0] = new Data[1];
+  } else {
+    throw new std::runtime_error("not implemented");
+  }
 }
 
 template <typename Data, typename Order>
