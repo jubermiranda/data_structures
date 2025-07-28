@@ -62,7 +62,7 @@ size_t heap<Data, Order>::size() const{
 
 template <typename Data, typename Order>
 bool heap<Data, Order>::is_empty() const{
-  throw new std::runtime_error("not implemented");
+  return (this->crr_height == 0 && this->crr_pos == 0);
 }
 
 template <typename Data, typename Order>
