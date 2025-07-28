@@ -4,6 +4,14 @@
 #include <stdexcept>
 #include <vector>
 
+size_t pow_two(size_t n){
+  return 1 << n;
+}
+
+size_t sum_of_pow_two(size_t n){
+  return (pow_two(n+1) -1);
+}
+
 namespace MY_DS {
 
 template <typename Data, typename Order>
@@ -60,6 +68,11 @@ void heap<Data, Order>::clear() {
 template <typename Data, typename Order>
 void heap<Data, Order>::expand_heap() {
   throw new std::runtime_error("not implemented");
+}
+
+template <typename Data, typename Order>
+size_t heap<Data, Order>::calc_max_size() const {
+  return sum_of_pow_two(this->crr_height);
 }
 
 };
