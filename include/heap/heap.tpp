@@ -50,7 +50,14 @@ const Data& heap<Data, Order>::peek() const{
 
 template <typename Data, typename Order>
 size_t heap<Data, Order>::size() const{
-  throw new std::runtime_error("not implemented");
+  if( this->crr_height == 0 && this->crr_pos == 0){
+    return 0;
+  }
+
+  size_t max_size = this->calc_max_size();
+  size_t remaining_nodes = pow_two(this->crr_height) - this->crr_pos;
+
+  return max_size - remaining_nodes;
 }
 
 template <typename Data, typename Order>
