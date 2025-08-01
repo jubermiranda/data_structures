@@ -35,7 +35,13 @@ heap<Data, Order>::~heap(){
 
 template <typename Data, typename Order>
 void heap<Data, Order>::insert(const Data &item){
-  throw new std::runtime_error("not implemented");
+  if(this->hasnt_space()){
+    this->expand_heap();
+    this->crr_pos = 0;
+  }
+
+  this->heap_tree[this->crr_height][this->crr_pos++] = item;
+  this->float_up(this->crr_height, this->crr_pos - 1);
 }
 
 template <typename Data, typename Order>
@@ -78,13 +84,47 @@ void heap<Data, Order>::clear() {
 
 
 // -- private
+
+
+template <typename Data, typename Order>
+bool heap<Data, Order>::hasnt_space() const{
+  return (this->crr_pos >= pow_two(this->crr_height));
+}
+
+template <typename Data, typename Order>
+void heap<Data, Order>::float_up(size_t h, size_t pos) {
+  if(h == 0){
+    return;
+  }
+  size_t parent_pos = (pos - 1) / 2;
+  if(Order()(this->heap_tree[h][pos], this->heap_tree[h-1][parent_pos])){
+    std::swap(this->heap_tree[h][pos], this->heap_tree[h-1][parent_pos]);
+    this->float_up(h-1, parent_pos);
+  }
+}
+
 template <typename Data, typename Order>
 void heap<Data, Order>::expand_heap() {
   if(this->is_empty()){
     this->heap_tree = new Data*[1];
     this->heap_tree[0] = new Data[1];
   } else {
-    throw new std::runtime_error("not implemented");
+    size_t new_height = this->crr_height + 1;
+    if(new_height > MAX_HEIGHT){
+      throw std::runtime_error("Heap height exceeds maximum allowed height");
+    }
+
+    this->crr_height = new_height;
+    Data **new_tree = new Data*[new_height+1];
+    for(size_t i = 0; i < new_height; i++){
+      new_tree[i] = this->heap_tree[i];
+    }
+    new_tree[new_height] = new Data[pow_two(new_height)];
+
+    if(this->heap_tree != nullptr){
+      delete[] this->heap_tree;
+    }
+    this->heap_tree = new_tree;
   }
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <functional>
 #include <vector>
 
@@ -30,6 +31,8 @@ private:
 
   void expand_heap();
   size_t calc_max_size () const;
+  bool hasnt_space() const;
+  void float_up(size_t h, size_t p);
 };
 
 };
