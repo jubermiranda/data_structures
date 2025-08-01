@@ -3,9 +3,10 @@
 #include <gtest/gtest.h>
 
 
-TEST(MaxHeapTree, CheckSizeAfterCreation) {
+TEST(MaxHeapTree, CheckStatusAfterCreation) {
   MY_DS::heap<int> heap;
   ASSERT_EQ(heap.size(), 0);
+  ASSERT_TRUE(heap.is_empty());
 }
 
 TEST(MaxHeapTree, CheckSizeAfterInsertion) {
@@ -15,3 +16,4 @@ TEST(MaxHeapTree, CheckSizeAfterInsertion) {
   heap.insert(20);
   ASSERT_EQ(heap.size(), 2);
 }
+
