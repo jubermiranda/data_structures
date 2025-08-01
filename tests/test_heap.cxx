@@ -23,3 +23,15 @@ TEST(MaxHeapTree, CheckIsEmptyAfterInsertion) {
   heap.insert(10);
   ASSERT_FALSE(heap.is_empty());
 }
+
+TEST(MaxHeapTree, CheckSizeAfterMultipleInsertions) {
+  MY_DS::heap<int> heap;
+  ASSERT_EQ(heap.size(), 0);
+
+  for (int i = 0; i < 10; ++i) {
+    heap.insert(i);
+    EXPECT_EQ(heap.size(), i + 1);
+  }
+
+  ASSERT_EQ(heap.size(), 10);
+}
