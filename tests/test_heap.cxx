@@ -17,3 +17,9 @@ TEST(MaxHeapTree, CheckSizeAfterInsertion) {
   ASSERT_EQ(heap.size(), 2);
 }
 
+TEST(MaxHeapTree, CheckIsEmptyAfterInsertion) {
+  MY_DS::heap<int> heap;
+  ASSERT_TRUE(heap.is_empty());
+  heap.insert(10);
+  ASSERT_FALSE(heap.is_empty());
+}
