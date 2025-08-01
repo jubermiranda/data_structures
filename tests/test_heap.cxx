@@ -35,3 +35,15 @@ TEST(MaxHeapTree, CheckSizeAfterMultipleInsertions) {
 
   ASSERT_EQ(heap.size(), 10);
 }
+
+TEST(MaxHeapTree, CheckPeekFunctionality) {
+  MY_DS::heap<int> heap;
+  heap.insert(10);
+  ASSERT_EQ(heap.peek(), 10);
+
+  heap.insert(20);
+  ASSERT_EQ(heap.peek(), 20);
+
+  heap.insert(15);
+  ASSERT_EQ(heap.peek(), 20);
+}
