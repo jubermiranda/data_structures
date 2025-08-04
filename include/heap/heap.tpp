@@ -15,6 +15,28 @@ size_t sum_of_pow_two(size_t n){
 namespace MY_DS {
 
 template <typename Data, typename Order>
+heap<Data, Order>::heap(const heap &other) :
+heap_tree(nullptr), crr_height(other.crr_height), crr_pos(other.crr_pos)
+{
+  if(other.is_empty()){
+    this->expand_heap();
+    return;
+  }
+
+  this->heap_tree = new Data*[this->crr_height +1];
+  for(size_t i = 0; i < this->crr_height-1 ; i++){
+    this->heap_tree[i] = new Data[pow_two(i)];
+    for(size_t j = 0; j < pow_two(i); j++){
+      this->heap_tree[i][j] = other.heap_tree[i][j];
+    }
+  }
+  this->heap_tree[this->crr_height] = new Data[pow_two(this->crr_height)];
+  for(size_t j = 0; j < this->crr_pos; j++){
+    this->heap_tree[this->crr_height][j] = other.heap_tree[this->crr_height][j];
+  }
+}
+
+template <typename Data, typename Order>
 heap<Data, Order>::heap() :
   heap_tree(nullptr), crr_height(0), crr_pos(0)
 {
@@ -105,10 +127,15 @@ void heap<Data, Order>::float_up(size_t h, size_t pos) {
 
 template <typename Data, typename Order>
 void heap<Data, Order>::expand_heap() {
-  if(this->is_empty()){
+  if(this->is_empty() && this->heap_tree == nullptr){
     this->heap_tree = new Data*[1];
     this->heap_tree[0] = new Data[1];
+
   } else {
+    if(this->size() < this->calc_max_size()){
+      // dont expand if there is still space
+      return;
+    }
     size_t new_height = this->crr_height + 1;
     if(new_height > MAX_HEIGHT){
       throw std::runtime_error("Heap height exceeds maximum allowed height");

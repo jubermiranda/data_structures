@@ -11,7 +11,12 @@ const int MAX_HEIGHT = 32;
 template <typename Data, typename Order = std::less<Data>> 
 class heap {
 public:
+  heap(const heap&);
+  heap(heap&&) noexcept;
+  heap& operator=(const heap&);
+  heap& operator=(heap&&) noexcept;
   ~heap();
+
   heap();
   heap(std::vector<Data>);
 
