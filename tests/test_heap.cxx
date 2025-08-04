@@ -4,6 +4,7 @@
 
 class MaxHeapTestFixture : public ::testing::Test {
 protected:
+  MY_DS::heap<int> heap;
   void SetUp() override {
   }
 
@@ -12,13 +13,11 @@ protected:
 };
 
 TEST_F(MaxHeapTestFixture, CheckStatusAfterCreation) {
-  MY_DS::heap<int> heap;
   ASSERT_EQ(heap.size(), 0);
   ASSERT_TRUE(heap.is_empty());
 }
 
 TEST_F(MaxHeapTestFixture, CheckSizeAfterInsertion) {
-  MY_DS::heap<int> heap;
   heap.insert(10);
   ASSERT_EQ(heap.size(), 1);
   heap.insert(20);
@@ -26,14 +25,12 @@ TEST_F(MaxHeapTestFixture, CheckSizeAfterInsertion) {
 }
 
 TEST_F(MaxHeapTestFixture, CheckIsEmptyAfterInsertion) {
-  MY_DS::heap<int> heap;
   ASSERT_TRUE(heap.is_empty());
   heap.insert(10);
   ASSERT_FALSE(heap.is_empty());
 }
 
 TEST_F(MaxHeapTestFixture, CheckSizeAfterMultipleInsertions) {
-  MY_DS::heap<int> heap;
   ASSERT_EQ(heap.size(), 0);
 
   for (int i = 0; i < 10; ++i) {
@@ -45,7 +42,6 @@ TEST_F(MaxHeapTestFixture, CheckSizeAfterMultipleInsertions) {
 }
 
 TEST_F(MaxHeapTestFixture, CheckPeekFunctionality) {
-  MY_DS::heap<int> heap;
   heap.insert(10);
   ASSERT_EQ(heap.peek(), 10);
 
