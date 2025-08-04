@@ -86,7 +86,9 @@ heap<Data, Order>::~heap(){
 
 template <typename Data, typename Order>
 void heap<Data, Order>::insert(const Data &item){
-  if(this->hasnt_space()){
+  if(this->is_empty() && this->heap_tree == nullptr){
+    this->expand_heap();
+  } else if(this->hasnt_space()){
     this->expand_heap();
     this->crr_pos = 0;
   }
@@ -134,6 +136,9 @@ void heap<Data, Order>::clear() {
     delete[] this->heap_tree[i];
   }
   delete[] this->heap_tree;
+  this->heap_tree = nullptr;
+  this->crr_height = 0;
+  this->crr_pos = 0;
 }
 
 
