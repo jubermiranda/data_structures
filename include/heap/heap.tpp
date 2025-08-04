@@ -102,7 +102,10 @@ Data heap<Data, Order>::extract(){
 
 template <typename Data, typename Order>
 const Data& heap<Data, Order>::peek() const{
-  throw new std::runtime_error("not implemented");
+  if(this->is_empty()){
+    throw std::runtime_error("Heap is empty, cannot peek");
+  }
+  return this->heap_tree[0][0];
 }
 
 template <typename Data, typename Order>
@@ -147,8 +150,8 @@ void heap<Data, Order>::float_up(size_t h, size_t pos) {
   if(h == 0){
     return;
   }
-  size_t parent_pos = (pos - 1) / 2;
-  if(Order()(this->heap_tree[h][pos], this->heap_tree[h-1][parent_pos])){
+  size_t parent_pos = (pos) / 2;
+  if(Order()(this->heap_tree[h-1][parent_pos], this->heap_tree[h][pos])){
     std::swap(this->heap_tree[h][pos], this->heap_tree[h-1][parent_pos]);
     this->float_up(h-1, parent_pos);
   }
