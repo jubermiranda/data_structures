@@ -236,4 +236,23 @@ size_t heap<Data, Order>::calc_max_size() const {
   return sum_of_pow_two(this->crr_height);
 }
 
+template <typename Data, typename Order>
+void heap<Data, Order>::print(std::ostream &os) const {
+    if (is_empty()) {
+      os << "[EMPTY]";
+      return;
+    }
+    os << "Max size : " << this->calc_max_size() << std::endl
+        << "crr size: " << this->size() << std::endl
+        << "crr height: " << this->crr_height << std::endl
+        << "Elements: " << std::endl;
+
+    for (size_t h = 0; h < crr_height; ++h) {
+      for(size_t i = 0; i < pow_two(h); ++i) {
+        os << "[" << heap_tree[h][i] << "]";
+      }
+      os << "----" << std::endl;
+    }
+}
+
 };

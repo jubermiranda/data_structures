@@ -37,6 +37,9 @@ public:
     swap(a.crr_pos, b.crr_pos);
   }
 
+  void print(std::ostream &os) const;
+  
+
 private:
   Data **heap_tree;
   size_t crr_height;
