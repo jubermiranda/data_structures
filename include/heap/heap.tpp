@@ -57,6 +57,15 @@ heap<Data, Order>& heap<Data, Order>::operator=(const heap &other) {
 }
 
 template <typename Data, typename Order>
+heap<Data, Order>& heap<Data, Order>::operator=(heap &&other) noexcept {
+  if(this != &other){
+    this->clear();
+    std::swap(*this, other);
+  }
+  return *this;
+}
+
+template <typename Data, typename Order>
 heap<Data, Order>::heap() :
   heap_tree(nullptr), crr_height(0), crr_pos(0)
 {
