@@ -85,3 +85,26 @@ TEST_F(MaxHeapTestFixture, LargeInsertions){
     ASSERT_EQ(heap.peek(), expected_max);
   }
 }
+
+TEST_F(MaxHeapTestFixture, CheckExtractFunctionality) {
+  ASSERT_TRUE(heap.is_empty());
+  ASSERT_THROW(heap.extract(), std::runtime_error);
+
+  heap.insert(10);
+  heap.extract();
+  ASSERT_TRUE(heap.is_empty());
+
+  heap.insert(20);
+  heap.insert(40);
+  heap.insert(30);
+  ASSERT_EQ(heap.size(), 3);
+  ASSERT_EQ(heap.peek(), 40);
+
+  heap.extract();
+  ASSERT_EQ(heap.size(), 2);
+  ASSERT_EQ(heap.peek(), 30);
+
+  heap.extract();
+  heap.extract();
+  ASSERT_TRUE(heap.is_empty());
+}
