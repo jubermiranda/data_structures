@@ -1,6 +1,7 @@
 #pragma once
 
 #include "heap.h"
+#include <cstddef>
 #include <stdexcept>
 #include <vector>
 
@@ -104,8 +105,7 @@ Data heap<Data, Order>::extract(){
   }
 
   Data extracted_item = this->heap_tree[0][0];
-  heap_tree[0][0] = heap_tree[crr_height][crr_pos];
-  this->remove_last();
+  this->process_removal();
   this->sink_down(0, 0);
   return extracted_item;
 }
@@ -178,27 +178,46 @@ void heap<Data, Order>::sink_down(size_t h, size_t pos) {
 
   size_t left_child = pos * 2;
   size_t right_child = pos * 2 + 1;
+  size_t to_sink;
 
-  if(left_child >= crr_pos && right_child >= crr_pos){
+  if(left_child >= crr_pos)
     return;
+  if(right_child >= crr_pos)
+    to_sink = left_child;
+  else {
+    if(Order()(heap_tree[h][left_child], heap_tree[h][right_child])){
+      to_sink = right_child;
+    } else {
+      to_sink = left_child;
+    }
   }
 
-  // TODO chose child to proceed with
+  if(Order()(heap_tree[h][pos], heap_tree[h+1][to_sink])){
+    std::swap(heap_tree[h][pos], heap_tree[h+1][to_sink]);
+    this->sink_down(h+1, to_sink);
+  }
 }
 
 template <typename Data, typename Order>
-void heap<Data, Order>::remove_last() {
+void heap<Data, Order>::process_removal() {
   if(this->is_empty()){
     return;
   }
 
+  // Move last element to root and remove last element
+  size_t last_h, last_pos;
   if(crr_pos > 0){
-    crr_pos--;
-
+    last_h = crr_height;
+    last_pos = --crr_pos;
   } else {
-    crr_pos = pow_two(crr_height-1) - 1;
-    delete[] this->heap_tree[crr_height--];
+    last_h = crr_height - 1;
+    last_pos = pow_two(last_h) - 1;
+
+    crr_pos = last_pos;
+    delete[] heap_tree[crr_height];
+    heap_tree[crr_height--] = nullptr;
   }
+  heap_tree[0][0] = heap_tree[last_h][last_pos];
 }
 
 template <typename Data, typename Order>
@@ -247,12 +266,16 @@ void heap<Data, Order>::print(std::ostream &os) const {
         << "crr height: " << this->crr_height << std::endl
         << "Elements: " << std::endl;
 
-    for (size_t h = 0; h < crr_height; ++h) {
-      for(size_t i = 0; i < pow_two(h); ++i) {
+    for (size_t h = 0; h < crr_height; h++) {
+      for(size_t i = 0; i < pow_two(h); i++) {
         os << "[" << heap_tree[h][i] << "]";
       }
-      os << "----" << std::endl;
+      os << std::endl;
     }
+    for(size_t i = 0; i < crr_pos; i++) {
+      os << "[" << heap_tree[crr_height][i] << "]";
+    }
+    os << std::endl << "----" << std::endl;
 }
 
 };

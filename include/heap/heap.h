@@ -50,7 +50,7 @@ private:
   bool hasnt_space() const;
   void float_up(size_t h, size_t pos);
   void sink_down(size_t h, size_t pos);
-  void remove_last();
+  void process_removal();
 };
 
 };

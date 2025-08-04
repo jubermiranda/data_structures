@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <random>
+#include <sstream>
 #include <vector>
 
 class MaxHeapTestFixture : public ::testing::Test {
@@ -99,7 +100,6 @@ TEST_F(MaxHeapTestFixture, CheckExtractFunctionality) {
   heap.insert(30);
   ASSERT_EQ(heap.size(), 3);
   ASSERT_EQ(heap.peek(), 40);
-
   heap.extract();
   ASSERT_EQ(heap.size(), 2);
   ASSERT_EQ(heap.peek(), 30);
