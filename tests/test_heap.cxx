@@ -24,6 +24,18 @@ TEST_F(MaxHeapTestFixture, CheckSizeAfterInsertion) {
   ASSERT_EQ(heap.size(), 2);
 }
 
+TEST_F(MaxHeapTestFixture, CheckStatusAfterClear){
+  heap.insert(10);
+  heap.insert(20);
+  heap.insert(40);
+  ASSERT_EQ(heap.size(), 3);
+
+  heap.clear();
+
+  ASSERT_EQ(heap.size(), 0);
+  ASSERT_TRUE(heap.is_empty());
+}
+
 TEST_F(MaxHeapTestFixture, CheckIsEmptyAfterInsertion) {
   ASSERT_TRUE(heap.is_empty());
   heap.insert(10);
