@@ -29,6 +29,13 @@ public:
 
   void clear();
 
+  friend void swap(heap &a, heap &b) noexcept {
+    using std::swap;
+    swap(a.heap_tree, b.heap_tree);
+    swap(a.crr_height, b.crr_height);
+    swap(a.crr_pos, b.crr_pos);
+  }
+
 private:
   Data **heap_tree;
   size_t crr_height;
