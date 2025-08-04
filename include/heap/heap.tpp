@@ -37,6 +37,17 @@ heap_tree(nullptr), crr_height(other.crr_height), crr_pos(other.crr_pos)
 }
 
 template <typename Data, typename Order>
+heap<Data, Order>::heap(heap &&other) noexcept :
+  heap_tree(other.heap_tree), 
+  crr_height(other.crr_height), 
+  crr_pos(other.crr_pos)
+{
+  other.heap_tree = nullptr;
+  other.crr_height = 0;
+  other.crr_pos = 0;
+}
+
+template <typename Data, typename Order>
 heap<Data, Order>::heap() :
   heap_tree(nullptr), crr_height(0), crr_pos(0)
 {
