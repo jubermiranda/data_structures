@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <functional>
+#include <ostream>
 #include <vector>
 
 namespace MY_DS {
@@ -44,7 +45,9 @@ private:
   void expand_heap();
   size_t calc_max_size () const;
   bool hasnt_space() const;
-  void float_up(size_t h, size_t p);
+  void float_up(size_t h, size_t pos);
+  void sink_down(size_t h, size_t pos);
+  void remove_last();
 };
 
 };

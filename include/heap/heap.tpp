@@ -76,7 +76,7 @@ template <typename Data, typename Order>
 heap<Data, Order>::heap(std::vector<Data>) :
   heap_tree(nullptr), crr_height(0), crr_pos(0)
 {
-  throw new std::runtime_error("not implemented");
+  throw std::runtime_error("not implemented");
 }
 
 template <typename Data, typename Order>
@@ -99,7 +99,15 @@ void heap<Data, Order>::insert(const Data &item){
 
 template <typename Data, typename Order>
 Data heap<Data, Order>::extract(){
-  throw new std::runtime_error("not implemented");
+  if(this->is_empty()){
+    throw std::runtime_error("Heap is empty, cannot extract");
+  }
+
+  Data extracted_item = this->heap_tree[0][0];
+  heap_tree[0][0] = heap_tree[crr_height][crr_pos];
+  this->remove_last();
+  this->sink_down(0, 0);
+  return extracted_item;
 }
 
 template <typename Data, typename Order>
@@ -159,6 +167,37 @@ void heap<Data, Order>::float_up(size_t h, size_t pos) {
   if(Order()(this->heap_tree[h-1][parent_pos], this->heap_tree[h][pos])){
     std::swap(this->heap_tree[h][pos], this->heap_tree[h-1][parent_pos]);
     this->float_up(h-1, parent_pos);
+  }
+}
+
+template <typename Data, typename Order>
+void heap<Data, Order>::sink_down(size_t h, size_t pos) {
+  if(h >= this->crr_height){
+    return;
+  }
+
+  size_t left_child = pos * 2;
+  size_t right_child = pos * 2 + 1;
+
+  if(left_child >= crr_pos && right_child >= crr_pos){
+    return;
+  }
+
+  // TODO chose child to proceed with
+}
+
+template <typename Data, typename Order>
+void heap<Data, Order>::remove_last() {
+  if(this->is_empty()){
+    return;
+  }
+
+  if(crr_pos > 0){
+    crr_pos--;
+
+  } else {
+    crr_pos = pow_two(crr_height-1) - 1;
+    delete[] this->heap_tree[crr_height--];
   }
 }
 
