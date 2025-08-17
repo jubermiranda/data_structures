@@ -2,10 +2,9 @@
 
 #include <gtest/gtest.h>
 #include <random>
-#include <sstream>
 #include <vector>
 
-class MaxHeapTestFixture : public ::testing::Test {
+class MaxHeapIntTestFixture : public ::testing::Test {
 protected:
   MY_DS::heap<int> heap;
   void SetUp() override {
@@ -23,19 +22,19 @@ int gen_rand_int(int min, int max) {
 }
 
 
-TEST_F(MaxHeapTestFixture, CheckStatusAfterCreation) {
+TEST_F(MaxHeapIntTestFixture, CheckStatusAfterCreation) {
   ASSERT_EQ(heap.size(), 0);
   ASSERT_TRUE(heap.is_empty());
 }
 
-TEST_F(MaxHeapTestFixture, CheckSizeAfterInsertion) {
+TEST_F(MaxHeapIntTestFixture, CheckSizeAfterInsertion) {
   heap.insert(10);
   ASSERT_EQ(heap.size(), 1);
   heap.insert(20);
   ASSERT_EQ(heap.size(), 2);
 }
 
-TEST_F(MaxHeapTestFixture, CheckStatusAfterClear){
+TEST_F(MaxHeapIntTestFixture, CheckStatusAfterClear){
   heap.insert(10);
   heap.insert(20);
   heap.insert(40);
@@ -47,13 +46,13 @@ TEST_F(MaxHeapTestFixture, CheckStatusAfterClear){
   ASSERT_TRUE(heap.is_empty());
 }
 
-TEST_F(MaxHeapTestFixture, CheckIsEmptyAfterInsertion) {
+TEST_F(MaxHeapIntTestFixture, CheckIsEmptyAfterInsertion) {
   ASSERT_TRUE(heap.is_empty());
   heap.insert(10);
   ASSERT_FALSE(heap.is_empty());
 }
 
-TEST_F(MaxHeapTestFixture, CheckSizeAfterMultipleInsertions) {
+TEST_F(MaxHeapIntTestFixture, CheckSizeAfterMultipleInsertions) {
   ASSERT_EQ(heap.size(), 0);
 
   for (int i = 0; i < 10; ++i) {
@@ -64,7 +63,7 @@ TEST_F(MaxHeapTestFixture, CheckSizeAfterMultipleInsertions) {
   ASSERT_EQ(heap.size(), 10);
 }
 
-TEST_F(MaxHeapTestFixture, CheckPeekFunctionality) {
+TEST_F(MaxHeapIntTestFixture, CheckPeekFunctionality) {
   heap.insert(10);
   ASSERT_EQ(heap.peek(), 10);
 
@@ -75,7 +74,7 @@ TEST_F(MaxHeapTestFixture, CheckPeekFunctionality) {
   ASSERT_EQ(heap.peek(), 20);
 }
 
-TEST_F(MaxHeapTestFixture, LargeInsertions){
+TEST_F(MaxHeapIntTestFixture, LargeInsertions){
   std::vector<int> large_data;
   for(int i = 0; i < 4000; i++) {
     large_data.push_back(gen_rand_int(0, 20000));
@@ -87,7 +86,7 @@ TEST_F(MaxHeapTestFixture, LargeInsertions){
   }
 }
 
-TEST_F(MaxHeapTestFixture, CheckExtractFunctionality) {
+TEST_F(MaxHeapIntTestFixture, CheckExtractFunctionality) {
   ASSERT_TRUE(heap.is_empty());
   ASSERT_THROW(heap.extract(), std::runtime_error);
 
@@ -99,12 +98,18 @@ TEST_F(MaxHeapTestFixture, CheckExtractFunctionality) {
   heap.insert(40);
   heap.insert(30);
   ASSERT_EQ(heap.size(), 3);
-  ASSERT_EQ(heap.peek(), 40);
-  heap.extract();
-  ASSERT_EQ(heap.size(), 2);
-  ASSERT_EQ(heap.peek(), 30);
 
-  heap.extract();
-  heap.extract();
+  int extracted_item = heap.extract();
+  ASSERT_EQ(extracted_item, 40);
+  ASSERT_EQ(heap.size(), 2);
+
+  extracted_item = heap.extract();
+  ASSERT_EQ(extracted_item, 30);
+  ASSERT_EQ(heap.size(), 1);
+
+  extracted_item = heap.extract();
+  ASSERT_EQ(extracted_item, 20);
+  ASSERT_EQ(heap.size(), 0);
+
   ASSERT_TRUE(heap.is_empty());
 }
