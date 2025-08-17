@@ -1,17 +1,10 @@
 #pragma once
 
 #include "heap.h"
+#include "utils.h"
 #include <cstddef>
 #include <stdexcept>
 #include <vector>
-
-size_t pow_two(size_t n){
-  return 1 << n;
-}
-
-size_t sum_of_pow_two(size_t n){
-  return (pow_two(n+1) -1);
-}
 
 namespace MY_DS {
 
@@ -60,8 +53,8 @@ heap<Data, Order>& heap<Data, Order>::operator=(const heap &other) {
 template <typename Data, typename Order>
 heap<Data, Order>& heap<Data, Order>::operator=(heap &&other) noexcept {
   if(this != &other){
-    this->clear();
     std::swap(*this, other);
+    other.clear();
   }
   return *this;
 }
@@ -140,9 +133,13 @@ void heap<Data, Order>::clear() {
   if(this->is_empty())
     return;
 
-  for(int i=0; i < this->crr_height; i++){
-    delete[] this->heap_tree[i];
+  for(int i = crr_height; i >= 0 ; i--){
+    if(this->heap_tree[i] != nullptr){
+      delete[] this->heap_tree[i];
+      this->heap_tree[i] = nullptr;
+    }
   }
+
   delete[] this->heap_tree;
   this->heap_tree = nullptr;
   this->crr_height = 0;
